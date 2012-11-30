@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="ANSI"?>
+<AlbaLynx>
+	<!-- ============================================= -->
+	<!-- Default template of "TextArea" -->
+	<template Name="TextArea">
+		<!-- The title of TextArea. Vertical collision with the body is enabled -->
+		<primitive Name="Caption" Type="Text" Height="-1" Margin="0 0 0 10" Collision="2">
+			<color AllCorners="55 60 65 255" />
+		</primitive>
+		<!-- The body of TextArea. Vertical collision with the title is enabled -->
+		<primitive Name="Body" Type="Dummy" Collision="2">
+			<!-- Background color Passive -->
+			<primitive Name="bg_color" Type="Texture_9" Margin="2">
+				<state Type="Partial" Negative="Active | Pressed | InFocus" />
+				<color TopLeft="#ffcbd0d5" TopRight="#ffdbe0e5" BottomLeft="#ffd5dadf" BottomRight="#ffe5eaef" />
+				<texture
+					Image="BubbleSkin"
+					Border="2"
+					TexX_All="0		2	4	6"
+					TexY_All="88	90	92	94"
+				/>
+			</primitive>
+			<!-- Background color Active -->
+			<primitive Name="bg_color" Type="Texture_9" Margin="2">
+				<state Type="PartialALO" Positive="Active | Pressed | InFocus" />
+				<color TopLeft="#ffd3d8dd" TopRight="#ffe3e8ed" BottomLeft="#ffdde2e7" BottomRight="#ffedf2f7" />
+				<texture
+					Image="BubbleSkin"
+					Border="2"
+					TexX_All="0		2	4	6"
+					TexY_All="88	90	92	94"
+				/>
+			</primitive>
+			<!-- Border -->
+			<primitive Name="Border" Type="Texture_9">
+				<texture
+					Image="BubbleSkin"
+					Border="5"
+					TexX_All="137	142		160		165"
+					TexY_All="90	95		113		118"
+				/>
+			</primitive>
+			<!-- Text entry box. Horizontal collision with the scrollbar is enabled -->
+			<primitive Name="Value" Type="Text" Margin="4 4 4 8" Collision="1">
+				<color AllCorners="55 60 65 255" />
+				<text WordWrap="Yes" />
+			</primitive>
+			<!-- Position of the vertical scrollbar. Horizontal collision with the list items  etc is enabled -->
+			<primitive Name="ScrollV" Type="Dummy" Margin="2 2 2 -3" Width="26" Align="Right" Collision="1">
+				<default ChildTemplate="ScrollBarV_Embedded_2" />
+			</primitive>
+		</primitive>
+	</template>
+</AlbaLynx>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="ANSI"?>
+<AlbaLynx>
+	<!-- ============================================= -->
+	<!-- Default template for "OptionButton" element-->
+	<template Name="OptionButton">
+		<!-- Тело кнопки -->
+		<primitive Name="Body" Type="Dummy" Width="20" Height="20">
+			<!-- State: Passive -->
+			<primitive Name="Passive" Type="Texture">
+				<state Type="Partial" Negative="Locked | Active | Checked" />
+				<texture Image="BubbleSkin" XYWH="167 0 20 20" />
+			</primitive>
+			<!-- State: Active -->
+			<primitive Name="Active" Type="Texture">
+				<state Type="Partial" Positive="Active" Negative="Locked | Checked" />
+				<texture Image="BubbleSkin" XYWH="167 22 20 20" />
+			</primitive>
+			<!-- State: Locked -->
+			<primitive Name="Locked" Type="Texture">
+				<state Type="Partial" Positive="Locked" Negative="Checked" />
+				<texture Image="BubbleSkin" XYWH="167 44 20 20" />
+			</primitive>
+			<!-- State: Checked -->
+			<primitive Name="Checked" Type="Texture">
+				<state Type="Partial" Positive="Checked" Negative="Locked | Active" />
+				<texture Image="BubbleSkin" XYWH="167 66 20 20" />
+			</primitive>
+			<!-- State: Checked & Active -->
+			<primitive Name="CheckedActive" Type="Texture">
+				<state Type="Partial" Positive="Checked | Active" Negative="Locked" />
+				<texture Image="BubbleSkin" XYWH="167 88 20 20" />
+			</primitive>
+			<!-- State: Checked & Locked -->
+			<primitive Name="CheckedLocked" Type="Texture">
+			<state Type="Partial" Positive="Locked | Checked" />
+				<texture Image="BubbleSkin" XYWH="167 110 20 20" />
+			</primitive>
+		</primitive>
+		<!-- The text of the button -->
+		<primitive Name="Caption" Type="Text" Margin="0 0 0 24">
+			<color AllCorners="55 60 65 255" />
+			<text WordWrap="Yes" />
+		</primitive>
+	</template>
+</AlbaLynx>

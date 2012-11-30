@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="ANSI"?>
+<AlbaLynx>
+	<template Name="Resizer" Zone="None">
+		<primitive Name="Body" Type="Dummy" Margin="-9">
+			<primitive Name="Header" Type="Rect" Zone="Rect" Width="20px" Height="20px" Align="Center">
+				<dependzone name="Header" state="active" />
+				<color AllCorners="255 255 255 255" />
+				<rect Fill="0" />
+			</primitive>
+
+			<primitive Name="Rect" Type="Rect" Margin="4">
+				<color AllCorners="255 255 255 255" />
+				<rect Fill="0" />
+			</primitive>
+
+			<primitive Name="Resize_3" Type="Rect" Zone="Rect" width="9" height="9" Align="Top Left">
+				<color AllCorners="255 255 255 255" />
+				<rect Fill="0" />
+				<primitive Type="Rect">
+					<dependzone name="Resize_3" state="active" />
+					<color AllCorners="255 255 255 255" />
+				</primitive>
+			</primitive>
+
+			<primitive Name="Resize_2" Type="Rect" Zone="Rect" width="9" height="9" Align="Top Center">
+				<color AllCorners="255 255 255 255" />
+				<rect Fill="0" />
+				<primitive Type="Rect">
+					<dependzone name="Resize_2" state="active" />
+					<color AllCorners="255 255 255 255" />
+				</primitive>
+			</primitive>
+
+			<primitive Name="Resize_6" Type="Rect" Zone="Rect" width="9" height="9" Align="Top Right">
+				<color AllCorners="255 255 255 255" />
+				<rect Fill="0" />
+				<primitive Type="Rect">
+					<dependzone name="Resize_6" state="active" />
+					<color AllCorners="255 255 255 255" />
+				</primitive>
+			</primitive>
+
+			<primitive Name="Resize_4" Type="Rect" Zone="Rect" width="9" height="9" Align="Right Center">
+				<color AllCorners="255 255 255 255" />
+				<rect Fill="0" />
+				<primitive Type="Rect">
+					<dependzone name="Resize_4" state="active" />
+					<color AllCorners="255 255 255 255" />
+				</primitive>
+			</primitive>
+
+			<primitive Name="Resize_12" Type="Rect" Zone="Rect" width="9" height="9" Align="Bottom Right">
+				<color AllCorners="255 255 255 255" />
+				<rect Fill="0" />
+				<primitive Type="Rect">
+					<dependzone name="Resize_12" state="active" />
+					<color AllCorners="255 255 255 255" />
+				</primitive>
+			</primitive>
+
+			<primitive Name="Resize_8" Type="Rect" Zone="Rect" width="9" height="9" Align="Bottom Center">
+				<color AllCorners="255 255 255 255" />
+				<rect Fill="0" />
+				<primitive Type="Rect">
+					<dependzone name="Resize_8" state="active" />
+					<color AllCorners="255 255 255 255" />
+				</primitive>
+			</primitive>
+
+			<primitive Name="Resize_9" Type="Rect" Zone="Rect" width="9" height="9" Align="Bottom Left">
+				<color AllCorners="255 255 255 255" />
+				<rect Fill="0" />
+				<primitive Type="Rect">
+					<dependzone name="Resize_9" state="active" />
+					<color AllCorners="255 255 255 255" />
+				</primitive>
+			</primitive>
+
+			<primitive Name="Resize_1" Type="Rect" Zone="Rect" width="9" height="9" Align="Left Center">
+				<color AllCorners="255 255 255 255" />
+				<rect Fill="0" />
+				<primitive Type="Rect">
+					<dependzone name="Resize_1" state="active" />
+					<color AllCorners="255 255 255 255" />
+				</primitive>
+			</primitive>
+		</primitive>
+	</template>
+</AlbaLynx>

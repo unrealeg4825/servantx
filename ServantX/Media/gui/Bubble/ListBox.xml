@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="ANSI"?>
+<AlbaLynx>
+	<!-- ============================================ -->
+	<!-- Default template for "ListBox" element -->
+	<!-- Шаблон *по умолчанию* для элемента "ListBox" -->
+	<template Name="ListBox">
+		<!-- The title of ListBox. Vertical collision with the body is enabled -->
+		<primitive Name="Caption" Type="Text" Height="-1" Margin="0 0 0 10" Collision="2">
+			<color AllCorners="55 60 65 255" />
+		</primitive>
+		<!-- The body of ListBox. Vertical collision with the title is enabled -->
+		<primitive Name="Body" Type="Dummy" Collision="2">
+			<!-- Background color -->
+			<primitive Name="bg_color" Type="Texture_9" Margin="2">
+				<color TopLeft="#ffcbd0d5" TopRight="#ffdbe0e5" BottomLeft="#ffd5dadf" BottomRight="#ffe5eaef" />
+				<texture
+					Image="BubbleSkin"
+					Border="2"
+					TexX_All="0		2	4	6"
+					TexY_All="88	90	92	94"
+				/>
+			</primitive>
+			<!-- Border -->
+			<primitive Name="Border" Type="Texture_9">
+				<texture
+					Image="BubbleSkin"
+					Border="5"
+					TexX_All="137	142		160		165"
+					TexY_All="90	95		113		118"
+				/>
+			</primitive>
+			<!-- Position of the list items. Horizontal collision with the scrollbar is enabled -->
+			<primitive Name="Children" Type="Dummy" Zone="Rect" Margin="3" Collision="1" />
+			<!-- Position of the vertical scrollbar. Horizontal collision with the list items  etc is enabled -->
+			<primitive Name="ScrollV" Type="Dummy" Margin="2 2 2 -3" Width="26" Align="Right" Collision="1">
+				<default ChildTemplate="ScrollBarV_Embedded_2" />
+			</primitive>
+		</primitive>
+	</template>
+
+	<!-- ============================================= -->
+	<!-- Default template for "ListItem" element -->
+	<template Name="ListItem">
+		<!-- Background active -->
+		<primitive Name="Active" Type="Rect" Margin="2 0">
+			<state Type="Partial" Positive="Active" Negative="Locked | Checked" />
+			<color TopLeft="#77ffffff" TopRight="#77ffffff" BottomLeft="#77dadfe4" BottomRight="#77dadfe4" />
+			<rect Fill="Yes" />
+		</primitive>
+		<!-- Background checked -->
+		<primitive Name="Checked" Type="Rect" Margin="2 0">
+			<state Type="Partial" Positive="Checked" Negative="Locked" />
+			<color TopLeft="#ffffffff" TopRight="#ffffffff" BottomLeft="#ffdadfe4" BottomRight="#ffdadfe4" />
+			<rect Fill="Yes" />
+		</primitive>
+		<!-- Border -->
+		<primitive Name="Border" Type="Texture_3" Height="27">
+			<state Type="PartialALO" Positive="Active | Pressed | Checked" Negative="Locked" />
+			<texture
+				Image="BubbleSkin"
+				Border="3"
+				TexX_All="139	142		159		162"
+				TexY_All="204	231"
+			/>
+		</primitive>
+		<!-- Caption -->
+		<primitive Name="Caption" Type="Text" Width="-1" Margin="0 2 0 6">
+			<state Type="Partial" Negative="Checked | Locked" />
+			<text Align="Left Center" />
+			<color AllCorners="55 60 65 255" />
+		</primitive>
+		<!-- Caption checked -->
+		<primitive Name="Caption" Type="Text" Width="-1" Margin="0 2 0 6">
+			<state Type="Partial" Positive="Checked" Negative="Locked" />
+			<text Align="Left Center" Font="PT_Sans_Italic"/>
+			<color AllCorners="55 60 65 255" />
+		</primitive>
+		<!-- Caption locked -->
+		<primitive Name="Caption" Type="Text" Width="-1" Margin="0 2 0 6">
+			<state Type="Partial" Positive="Locked" />
+			<text Align="Left Center" />
+			<color AllCorners="155 160 165 255" />
+		</primitive>
+	</template>
+</AlbaLynx>

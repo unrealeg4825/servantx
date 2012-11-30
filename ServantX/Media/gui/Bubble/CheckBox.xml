@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="ANSI"?>
+<AlbaLynx>
+	<!-- ============================================= -->
+	<!-- *CheckBox* template for "ToggleButton" element -->
+	<template Name="CheckBox">
+		<!-- The body of CheckBox -->
+		<primitive Name="Body" Type="Dummy" Width="24" Height="24">
+			<!-- State: Passive -->
+			<primitive Name="BodyPassive" Type="Texture_3">
+				<state Type="Partial" Positive="None" Negative="Locked | Active | Pressed" />
+				<texture
+					Image="BubbleSkin"
+					Border="6"
+					TexX_All="59 65 73 79"
+					TexY_All="72 96"
+				/>
+			</primitive>
+			<!-- State: Active -->
+			<primitive Name="BodyActive" Type="Texture_3">
+				<state Type="Partial" Positive="Active" Negative="Locked | Pressed" />
+				<texture
+					Image="BubbleSkin"
+					Border="6"
+					TexX_All="59 65 73 79"
+					TexY_All="97  121"
+				/>
+			</primitive>
+			<!-- State: Pressed -->
+			<primitive Name="BodyPressed" Type="Texture_3">
+				<state Type="Partial" Positive="Pressed" Negative="Locked" />
+				<texture
+					Image="BubbleSkin"
+					Border="6"
+					TexX_All="59 65 73 79"
+					TexY_All="122 146"
+				/>
+			</primitive>
+			<!-- State: Locked -->
+			<primitive Name="BodyLock" Type="Texture_3">
+				<state Type="Partial" Positive="Locked" />
+				<texture
+					Image="BubbleSkin"
+					Border="6"
+					TexX_All="59 65 73 79"
+					TexY_All="147 171"
+				/>
+			</primitive>
+			<!-- State: Checked -->
+			<primitive Name="Checked" Type="Texture" Width="14" Height="11" Align="Center">
+				<state Type="Partial" Positive="Checked" Negative="Locked" />
+				<texture Image="BubbleSkin" XYWH="0 110 14 11" />
+			</primitive>
+			<!-- State: Checked + Locked -->
+			<primitive Name="Checked" Type="Texture" Width="14" Height="11" Align="Center">
+				<state Type="Partial" Positive="Checked | Locked" />
+				<color AllCorners="#66FFFFFF" />
+				<texture Image="BubbleSkin" XYWH="0 110 14 11" />
+			</primitive>
+		</primitive>
+		<!-- The text of the button -->
+		<primitive Name="Caption" Type="Text" Margin="2 0 0 28">
+			<text WordWrap="Yes" />
+			<color AllCorners="55 60 65 255" />
+		</primitive>
+	</template>
+</AlbaLynx>

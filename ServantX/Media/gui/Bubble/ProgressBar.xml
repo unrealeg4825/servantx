@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="ANSI"?>
+<AlbaLynx>
+	<!-- =========================================== -->
+	<!-- Default template of "ProgressBar" -->
+	<template Name="ProgressBar">
+		<!-- Caption -->
+		<primitive Name="Caption" Type="Text" Height="-1" Margin="2" Collision="2">
+			<color AllCorners="55 60 65 255" />
+		</primitive>
+		<!-- Bar -->
+		<primitive Type="Dummy" Collision="2" Height="24">
+			<primitive Name="Bar" Type="Dummy" Margin="4">
+				<!-- For primitives "Full"&"Empty" margin must be 0 -->
+				<primitive Name="Full" Type="Rect" Margin="0" Align="Left">
+					<color AllCorners="50 255 50 255" />
+				</primitive>
+				<!-- For primitives "Full"&"Empty" margin must be 0 -->
+				<primitive Name="Empty" Type="Rect" Margin="0" Align="Right">
+					<color AllCorners="255 50 50 255" />
+				</primitive>
+			</primitive>
+			<!-- Border -->
+			<primitive Name="BodyPassive" Type="Texture_3">
+				<texture
+					Image="BubbleSkin"
+					Border="6"
+					TexX_All="81 87 95 101"
+					TexY_All="172 196"
+				/>
+			</primitive>
+			<!-- Value -->
+			<primitive Name="Value" Type="Text" Margin="0 0 1">
+				<text Align="Center" />
+			</primitive>
+		</primitive>
+	</template>
+	
+	<!-- =========================================== -->
+	<!-- Vertical template of "ProgressBar" -->
+	<template Name="ProgressBarV">
+		<!-- Caption -->
+		<primitive Name="Caption" Type="Text" Width="-1" Margin="2" Collision="1">
+			<color AllCorners="55 60 65 255" />
+			<text Angle="-90" Align="Center" />
+		</primitive>
+		<!-- Bar -->
+		<primitive Type="Dummy" Collision="1" Width="24">
+			<primitive Name="Bar" Type="Dummy" Margin="4">
+				<default vertical="true" />
+				<!-- For primitives "Full"&"Empty" margin must be 0 -->
+				<primitive Name="Full" Type="Rect" Margin="0" Align="Bottom">
+					<color AllCorners="50 255 50 255" />
+				</primitive>
+				<!-- For primitives "Full"&"Empty" margin must be 0 -->
+				<primitive Name="Empty" Type="Rect" Margin="0" Align="Top">
+					<color AllCorners="255 50 50 255" />
+				</primitive>
+			</primitive>
+			<!-- Border -->
+			<primitive Name="BodyPassive" Type="Texture_3v">
+				<texture
+					Image="BubbleSkin"
+					Border="6"
+					TexX_1="81 81"
+					TexX_2="87 87"
+					TexX_3="95 95"
+					TexX_4="101 101"
+					TexY_1="172 196"
+					TexY_2="172 196"
+					TexY_3="172 196"
+					TexY_4="172 196"
+				/>
+			</primitive>
+			<!-- Value -->
+			<primitive Name="Value" Type="Text" Margin="0 1 0 0">
+				<text Align="Center" Angle="-90" />
+			</primitive>
+		</primitive>
+	</template>
+</AlbaLynx>

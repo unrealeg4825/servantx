@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="ANSI"?>
+<AlbaLynx>
+	<!-- ================ -->
+	<!-- Font loading -->
+	<font Type="Bitmap" Name="CandaraGlow" File="Fonts/candara_regular_14.xml" />
+	<font Type="Vector" Name="PT_Sans" File="Fonts\PT_Sans.ttf" Size="13px" Cache="200" Default="1" />
+	<font Type="Vector" Name="PT_Sans_Bold" File="Fonts\PT_Sans_Bold.ttf" Size="13px" />
+	<font Type="Vector" Name="PT_Sans_Italic" File="Fonts\PT_Sans_Italic.ttf" Size="13px" />
+
+	<!-- ============================================ -->
+	<!-- Template images loading -->
+	<image Name="BubbleSkin" File="Bubble\Bubble.png" TextureFlags="2" ImageFlags="2" />
+
+	<!-- =============================== -->
+	<!-- Templates for the rest of elements -->
+	<load File="Bubble/Balloon.xml" />
+	<load File="Bubble/Button.xml" />
+	<load File="Bubble/CheckBox.xml" />
+	<load File="Bubble/ComboBox.xml" />
+	<load File="Bubble/Desktop.xml" />
+	<load File="Bubble/Explorer.xml" />
+	<load File="Bubble/Icons.xml" />
+	<load File="Bubble/ListBox.xml" />
+	<load File="Bubble/MsgBox.xml" />
+	<load File="Bubble/Menu.xml" />
+	<load File="Bubble/OptionButton.xml" />
+	<load File="Bubble/ParamSet.xml" />
+	<load File="Bubble/ProgressBar.xml" />
+	<load File="Bubble/Resizer.xml" />
+	<load File="Bubble/Static.xml" />
+	<load File="Bubble/Tabs.xml" />
+	<load File="Bubble/TextArea.xml" />
+	<load File="Bubble/TextBox.xml" />
+	<load File="Bubble/TreeView.xml" />
+	<load File="Bubble/ScrollBar.xml" />
+	<load File="Bubble/ScrollArea.xml" />
+	<load File="Bubble/Window.xml" />
+</AlbaLynx>

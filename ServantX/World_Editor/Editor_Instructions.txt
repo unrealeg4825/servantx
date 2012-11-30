@@ -1,0 +1,21 @@
+Enter the number of the zone you wish to edit at the start. Try entering 1 for the first zone in the game.
+
+Move Camera: While holding the Space key - use the mouse to look, left mouse button to move forward, right mouse button to move backward.
+
+The number pad keys can also be used to move the camera.
+
+Select model: Right click on a model to select it (it will appear red if you select it), you can now manipulate the model.
+
+When a model is selected the arrow keys can be used to move it, along with the A and Z keys to move it up and down.
+
+If you click the rotate model check box, you can now use the Arrow keys and the A and Z keys to rotate the selected model.
+
+Scale: You can enter a scale value in the scale model section to change the size of your model (does not work for models placed with the Tree Placement tool).
+
+Tree Placement tool - This tool is for mass placing of the 4 models that are found in your Media\Tree folder. For example this tool can be used to make an instant forest on your map. The 4 models must be called Tree1.b3d, Tree2.b3d, Tree3.b3d, Tree4.b3d (Of course they do not have to be trees). 4 trees are included.
+
+F1/F2 Keys - show/hide wireframe view.
+
+
+
+

@@ -1,0 +1,1182 @@
+Function Collide_with_Zone_warps()
+
+If myzone = 1 Then
+If EntityX(player_pivot) > 2540 Then ;left zone
+Createzone(2)
+EndIf
+
+If EntityZ(player_pivot) < 1 Then ;north zone
+Createzone(3)
+EndIf
+
+
+If EntityX(player_pivot) < 1 Then ;left zone
+Createzone(4)
+EndIf
+
+If EntityZ(player_pivot) > 2540 Then ;north zone
+Createzone(3)
+EndIf
+EndIf
+
+If myzone = 2 Then
+
+If EntityX(player_pivot) > 2540 Then ;left zone
+Createzone(3)
+EndIf
+
+If EntityZ(player_pivot) < 1 Then ;north zone
+Createzone(4)
+EndIf
+
+
+If EntityX(player_pivot) < 1 Then ;left zone
+Createzone(2)
+EndIf
+
+If EntityZ(player_pivot) > 2540 Then ;north zone
+Createzone(1)
+EndIf
+EndIf
+
+If myzone = 3 Then
+
+If EntityX(player_pivot) > 2540 Then ;left zone
+Createzone(4)
+EndIf
+
+If EntityZ(player_pivot) < 1 Then ;north zone
+Createzone(2)
+EndIf
+
+
+If EntityX(player_pivot) < 1 Then ;left zone
+Createzone(1)
+EndIf
+
+If EntityZ(player_pivot) > 2540 Then ;north zone
+Createzone(2)
+EndIf
+EndIf
+
+End Function
+
+Function convertGameTime$()
+	temp$=ggametime
+	hours = Int(temp)
+	mins = 60*(Float(ggametime)-hours)
+	Return hours + ":" + mins
+End Function
+
+Function Create_lightning(gx#,gy#,gz#,high#,seg)
+	;create a lightning bolt sequence with sprites and position ready for use, also set the various alpha levels
+	l.lightningbolt = New lightningbolt
+	l\x=gx
+	l\z=gz
+	terheight#= TerrainHeight(terrain,l\x,l\z) 
+	spoty#=TerrainY(terrain,l\x,terheight,l\z)
+	ly#=spoty+1000
+	l\entity1 = LoadSprite ("sprites\lightning1frame1.png",2)
+	l\entity2 = LoadSprite ("sprites\lightning1frame2.png",2)
+	l\entity3 = LoadSprite ("sprites\lightning1frame2.png",2)
+	EntityFX l\entity1,25
+	EntityFX l\entity2,25
+	EntityFX l\entity3,25
+	ScaleSprite l\entity1,50,1250
+	ScaleSprite l\entity2,50,1250
+	ScaleSprite l\entity3,50,1250
+	SpriteViewMode l\entity1,2
+	SpriteViewMode l\entity2,2
+	SpriteViewMode l\entity3,2
+	PositionEntity l\entity1,gx,gy,gz
+	PositionEntity l\entity2,gx,gy,gz
+	PositionEntity l\entity3,gx,gy,gz
+	ly#=Rnd(0,360)
+	RotateEntity l\entity1,0,ly,0
+	RotateEntity l\entity2,0,ly,0
+	RotateEntity l\entity3,0,ly,0
+	
+	EmitSound thunder,l\entity1
+	l\start=MilliSecs()
+	flash=255
+End Function
+
+Function CreatePlayer.pdata(name$, id%)
+	Local p.pdata = New pdata
+		
+;For msg.MsgInfo = Each MsgInfo
+	p\initialized=False						;haven't got enough position data for spline
+	;p\name = Mid$(msg\msgData,1,4) 
+	p\name = Left(name$,Len(name$)-2)
+	;p\model = Mid$(msg\msgData,5,4)
+	p\model = Mid(name$,Len(name$)-1,1) 
+	;p\sex = Mid$(msg\msgData,9,4)
+	p\sex = Mid(name$,Len(name$),1)
+	p\net_id = id
+	
+	;p\x = 0
+	;p\y = -200
+	;p\z = 0
+
+	
+	
+	temp=p\model
+	
+	;p\splineID = BP_CreateSpline()
+	
+	Select p\model 
+       	Case 2              ;amazon 
+			p\entity = CopyEntity(Amazon) 
+			
+		Case 3
+		    p\entity = CopyEntity(Spectra) 
+	
+		Default               ;knight 
+        	p\entity = CopyEntity(player) 
+			;p\entity = LoadAnimMesh("media/models/player/knight.b3d")
+    End Select 
+	p\lasttime=250
+	p\packettime=MilliSecs()
+	
+    RotateEntity p\entity,0,90,0
+    ScaleEntity p\entity,2.3,2.3,2.3
+    createtext(p\name,p\entity)
+    p\namesprite = 1
+
+   ;gE_IdEmitter = EPS_Init_Emitter(109.0,5.0,2.02,2.0,180.0, p\entity,1.7,1.6,1.6,camera,3,1,1,1,0.0)
+    ;EPS_Init_Particule(gE_IdEmitter ,1.34,1.17,5.03,0.0,handle_texture,1,1.0,3,1,1.0,0.0,0.0,1.0,0.0,0.0,0,0)
+    ;EPS_Init_ParticuleColor( gE_IdEmitter,95.0,118.0,137.0,48.0,101.0,57.0,0.0,58.0,17.0)
+;Next
+	Return p
+End Function
+
+Function createtext(ctname$,ctent)
+		
+	tagWidth = Len(ctname$)*(FontWidth()/4)
+	tagheight = FontHeight()+1
+	
+	nametex = CreateTexture(tagWidth,tagheight, 1+4+8)
+	nameimg = CreateImage(tagWidth,tagheight)
+	SetBuffer ImageBuffer(nameimg)
+	Color 254,149,0
+	Text 0,0,ctname$
+	;Text 2,0,ctname$
+	;Text 0,2,ctname$
+	;Text 2,2,ctname$
+	;Color 255,0,0
+	;Text 1,1,ctname$
+
+
+	MaskImage nameimg, 0, 0, 0
+	
+	CopyRect 0,0, tagWidth, tagheight, 0, 0, ImageBuffer(nameimg), TextureBuffer(nametex)
+			
+		
+	SetBuffer BackBuffer()
+	
+	TEXTUREmask(nametex)
+	
+		
+	spr = CreateSprite(ctent)
+	SpriteViewMode spr,1
+	
+	
+	EntityTexture spr,nametex
+
+	ScaleSprite spr,1.5,.5
+	PositionEntity spr,0,2.5,0
+	;FreeTexture nametex
+	Return spr
+End Function
+
+Function TEXTUREmask( texture , sr=0 , sg=0 , sb=0, st = 1 )
+
+	TW = TextureWidth( texture )
+	TH = TextureHeight( texture )
+	SetBuffer TextureBuffer( texture )
+	LockBuffer 
+	For j = 0 To TH- 1
+		For i = 0 To TW - 1
+			argb = ReadPixelFast( i,j, TextureBuffer( texture ) )
+			r = ( argb And $FF0000) Shr 16
+			g = ( argb And $FF00 ) Shr 8  
+			b = ( argb And $FF )  
+			a = ( argb And $FF000000 ) Shr 24
+			
+			If ( r > sr-st And r < sr+st ) And  ( g > sg-st And g < sg+st ) And ( b > sb-st And b < sb+st )
+				a = 0 
+				
+				r = 0
+				g = 0
+				b = 0
+			
+			Else
+				a = 255
+			EndIf
+			argb = ( a Shl 24 ) Or ( r Shl 16 ) Or ( g Shl 8 ) Or b	
+			WritePixelFast i , j , argb, TextureBuffer( texture )
+		Next
+	Next			
+	UnlockBuffer
+	SetBuffer BackBuffer()
+		
+End Function
+
+Function create_water_ripple(entity,surface,colindex)
+If EntityCollided(entity,colindex) Then
+For rr.rain_ripple=Each rain_ripple
+            rr\ent = CopyEntity(ripple)
+			rr\life#=rr\life#-1
+			ScaleSprite rr\ent,4*(1-rr\life#/10),4*(1-rr\life#/10)
+			EntityAlpha rr\ent,rr\life#/10*0.5
+rx=EntityX(rr\ent)
+rz=EntityZ(rr\ent)
+waterheight= TerrainHeight(surface,rx,rz) 
+waterspoty#=TerrainY(surface,rx,waterheight,rz)
+PositionEntity rr\ent,EntityX(entity,True),waterspoty#,EntityZ(entity,True)
+			If rr\life#=<0
+				FreeEntity rr\ent
+				Delete rr.rain_ripple
+			EndIf
+		Next
+
+End If
+End Function
+
+Function CreateZone(zoneID,tombs=False)
+LeaveZone()
+If tombs = False
+Terrain = LoadTerrain("Media\Zone\"+ZoneID+"\lvl_hmap"+ZoneID+".bmp")
+tex2 = LoadTexture("Media\Zone\"+ZoneID+"\lvl_detail"+ZoneID+".bmp")
+grass = LoadTexture("Media\Zone\"+ZoneID+"\lvl_tmap"+ZoneID+".jpg")
+ScaleTexture grass,256,256
+ScaleEntity terrain,10,300,10
+PositionEntity terrain,0,0,0,True
+ScaleTexture tex2,8,8
+TerrainDetail terrain,2000,True
+EntityTexture terrain,grass
+EntityTexture terrain,tex2,0,1
+EntityType terrain,1
+
+grassMesh=CreateMesh()
+grassTexture=LoadTexture("sprites\Zone\"+ZoneID+"\grass.png",3)
+;EntityFX grassMesh,1
+;EntityAlpha grassmesh,0.5
+grassSurface=CreateSurface(grassMesh)
+EntityTexture grassMesh,grassTexture
+grassRange#=100
+
+positiongrass(terrain)
+
+;loadnpc(zoneID)
+
+treefile = ReadFile("Media\Zone\"+ZoneID+"\obj"+ZoneID+".t3d")
+While Not Eof(treefile)
+	o.obj = New obj
+	o\FileName=ReadString(treefile)
+	;TextureFilter "tree",4
+	o\entity=LoadMesh(o\FileName)
+	o\x=ReadFloat(treefile)
+	o\y=ReadFloat(treefile)
+	o\z=ReadFloat(treefile)
+	;o\yaw=ReadFloat(treefile)
+	PositionEntity o\entity,o\x,o\y-2,o\z
+	RotateEntity o\entity,0,Rnd(0,360),0
+	EntityType o\entity,1
+	ScaleEntity o\entity,.3,.3,.3
+	;EntityTexture o\entity,tex1
+	EntityAutoFade o\entity,700,900	
+Wend
+CloseFile(treefile)
+
+buildings = ReadFile("Media\Zone\"+ZoneID+"\buildings"+ZoneID+".t3d")
+While Not Eof(buildings)
+	o.obj = New obj
+	o\FileName=ReadString(buildings)
+	;TextureFilter "tree",4
+	o\entity=LoadMesh(o\FileName)
+	o\x=ReadFloat(buildings)
+	o\y=ReadFloat(buildings)
+	o\z=ReadFloat(buildings)
+	o\pitch=ReadFloat(buildings)
+	o\yaw=ReadFloat(buildings)
+	o\roll=ReadFloat(buildings)
+	PositionEntity o\entity,o\x,o\y,o\z
+	RotateEntity o\entity,o\pitch,o\yaw,o\roll
+	EntityType o\entity,1
+	ScaleEntity o\entity,.3,.3,.3
+	;EntityTexture o\entity,tex1
+	EntityAutoFade o\entity,700,900	
+Wend
+CloseFile(buildings)
+
+
+wepsFile = ReadFile("Char\Data\"+ZoneID+"\weps.dat")
+While Not Eof(wepsFile)
+	w.weapons = New weapons
+	w\file$ = ReadLine(wepsFile)
+	w\name$ = ReadLine(wepsfile)
+	w\ID = ReadLine(wepsfile) 
+	w\x=ReadLine(wepsfile)
+	w\y=ReadLine(wepsfile)
+	w\z=ReadLine(wepsfile)
+	w\weight=ReadLine(wepsfile)
+    w\Strength=ReadLine(wepsfile)
+    w\entity = CopyEntity(pike)
+	PositionEntity w\entity,w\x,w\y,w\z
+	EntityType w\entity,Wep_col
+	ScaleEntity w\entity,.3,.3,.3
+	EntityAutoFade w\entity,700,900	
+	EntityPickMode w\entity,2
+Wend
+CloseFile(wepsFile)
+
+
+
+
+Else
+
+tomb = LoadMesh("Media\gfx\TOMB\"+ZoneID+".b3d")
+
+EndIf
+myzone = ZoneID
+BP_UDPMessage(0,4,ZoneID,False,False)
+Select ZoneID
+Case 1 
+irc_log " You are now in Alnion.",$3366FF
+
+Case 2
+irc_log " You are now in Alnion Forest.",$3366FF
+
+Case 3
+irc_log " You are now in Forbidding lands.",$3366FF
+
+Case 4
+irc_log " You are now in Mackmore",$3366FF
+
+Case 5 
+irc_log " You are now in Mackmore Tomb",$3366FF
+
+
+End Select
+
+
+    playerx#=EntityX(player_pivot,True)
+	playerz#=EntityZ(player_pivot,True)
+	terheight= TerrainHeight(terrain, playerx#, playerz#) 
+	spoty#=TerrainY(terrain,playerx#,terheight, playerz#)
+
+End Function
+
+Function debugtext()
+	;Text 50,50,sound ;"PING: " + BP_getmyping%()
+	;Text 50,60,Entitycollide(camera,townborder);EntityX(camera,True)
+	;Text 50,70,EntityY(camera,True)
+	;Text 50,80,EntityZ(camera,True);"Server Time : " + gservertime
+	;Text 50,90,grassmapscale + " : " + tempgrassx# + " : " + tempgrassy#
+	;For p.pData = Each pdata
+	;Text 50,100,"current cloud cover = " + weatherdensity$
+	;Text 50,140,TrisRendered()
+	If wanttoleave=True Then
+		timetoquit=Int((quitdelay-leavingworld)/1000.0)
+		Text 50,120,"REQUESTING EXIT WORLD (" + timetoquit + " secs) - MOVE TO CANCEL"
+	EndIf
+	SetFont fntArial
+	Color 158,13,6
+	Text 143,38,gdate
+	
+End Function
+
+Function Distance#(x1#, y1#, x2#, y2#)
+	width# = x1# - x2#
+	height# = y1# - y2#
+	dist# = Sqr#(width * width + height * height) 
+	Return dist
+
+End Function
+
+Function FindBreak(msg$,cnt,bChr$=" ")
+	Local break%=1
+	For i=0 To cnt
+		break=Instr(msg,bChr,break+1)
+		If Not break Exit
+	Next
+	Return break
+End Function
+
+Function Find.User(nick$)
+	For u.user=Each user
+		If u\nick=nick Return u.user
+	Next
+End Function
+
+Function FindPdata.pdata(id%)
+	;Hunt for the player information that matches id%
+	For p.pdata = Each pdata
+		If p\net_id = id Then Return p
+	Next
+End Function
+
+;------FPS CODE--------------
+Function fps()
+	
+	If MilliSecs() - fpslastupdated > fpsupdate
+	
+		fpslastcount# = (Float(fpscount / Float(fpsupdate/1000)))
+		fpscount = 0
+		fpslastupdated = MilliSecs()
+	
+	Else
+	
+		fpscount = fpscount + 1
+	
+	EndIf
+	
+	Return Int(fpslastcount)
+	
+End Function
+;---------------------------------
+
+;----------------------------MAIN MENU-------------------------
+Function mainmenu()
+Cls
+ menubackground = LoadImage("misc\menu\menuback.bmp")
+ startbutt = LoadImage("misc\menu\startbutt.bmp")
+ Optionsbutt = LoadImage("misc\menu\optionsbutt.bmp")
+ Creditsbutt = LoadImage("misc\menu\Creditsbutt.bmp")
+ Exitbutt = LoadImage("misc\menu\Exitbutt.bmp")
+ startbutt2 = LoadImage("misc\menu\startbutt2.bmp")
+ Optionsbutt2 = LoadImage("misc\menu\optionsbutt2.bmp")
+ Creditsbutt2 = LoadImage("misc\menu\Creditsbutt2.bmp")
+ Exitbutt2 = LoadImage("misc\menu\Exitbutt2.bmp")
+ pointer = LoadImage("misc\pointer.png")
+SetBuffer BackBuffer()
+HidePointer 
+While Not KeyHit(1)
+Cls
+startimg = 1
+optionimg = 1
+Creditimg = 1
+Exitimg = 1
+
+
+If ImagesOverlap(startbutt,320-32,300-32,pointer,MouseX()-88,MouseY()-27) Then
+startimg = 0
+EndIf
+
+If ImagesOverlap(Optionsbutt,320-32,350-32,pointer,MouseX()-88,MouseY()-27) Then
+optionimg = 0
+EndIf
+
+If ImagesOverlap(Creditsbutt,320-32,390-32,pointer,MouseX()-88,MouseY()-27) Then
+Creditimg = 0
+EndIf
+
+If ImagesOverlap(Exitbutt,320-32,500-32,pointer,MouseX()-88,MouseY()-27) Then
+Exitimg = 0
+EndIf
+
+If MouseDown(1) And ImageRectOverlap(Optionsbutt2,320,350,MouseX(),MouseY(),1,1) Then
+;options()
+EndIf
+
+If MouseDown(1) And ImageRectOverlap(Creditsbutt2,320,390,MouseX(),MouseY(),1,1) Then
+;Credits()
+EndIf
+
+
+If MouseDown(1) And ImageRectOverlap(Exitbutt2,320,500,MouseX(),MouseY(),1,1) Then
+End
+EndIf
+
+
+DrawImage menubackground,280,260
+
+If startimg = 1 Then
+ DrawImage startbutt,320,300
+Else
+ DrawImage startbutt2,320,300
+EndIf
+
+If optionimg = 1 Then
+ DrawImage Optionsbutt,320,350
+Else
+ DrawImage Optionsbutt2,320,350
+EndIf
+
+If Creditimg = 1 Then
+ DrawImage Creditsbutt,320,390
+Else
+ DrawImage Creditsbutt2,320,390
+EndIf
+
+If Exitimg = 1 Then
+ DrawImage Exitbutt,320,500
+Else
+ DrawImage Exitbutt2,320,500
+EndIf
+
+
+DrawImage pointer,MouseX(),MouseY()
+
+
+
+
+Flip
+If MouseDown(1) And ImageRectOverlap(startbutt2 ,320,300,MouseX(),MouseY(),1,1) Then
+Exit
+EndIf
+Wend
+
+FreeImage menubackground
+FreeImage startbutt
+FreeImage startbutt2
+FreeImage Optionsbutt
+FreeImage Optionsbutt2
+FreeImage Creditsbutt
+FreeImage Creditsbutt2
+FreeImage Exitbutt
+FreeImage Exitbutt2
+FreeImage pointer 
+
+End Function
+;-------------------------------------------END MENU------------------------------------------
+
+Function GammaFade(speed)
+	If speed=0 Return 0
+	f=-255*(speed>0)
+	Repeat
+		f=f+speed
+		For g=0 To 255
+			SetGamma g,g,g, g+f,g+f,g+f
+		Next
+		UpdateGamma
+		Delay 1
+		If f<=-255 Or f>=0 Then Exit
+	Forever	
+End Function
+
+Function GammaReset()
+ For g=0 To 255
+  SetGamma g,g,g, g,g,g
+ Next
+ UpdateGamma
+End Function
+
+Function GetAction$(msg$)
+	Local break%=Instr(msg," ")
+	If Not Break Return ""
+	
+	If Upper(Left(msg,break))=(Chr(1)+"ACTION ") And Mid(msg,Len(msg),1)=Chr(1)
+		Return Mid(msg,break+1,Len(msg)-break-1)
+	Else
+		Return ""
+	EndIf
+End Function
+
+Function GetCommand$(msg$,bChr$=" ")
+	Local break%=Instr(msg,bChr)
+	If break Return Left(msg,break-1) Else Return msg
+End Function
+
+Function GetContext$(msg$)
+	Local break1%=Instr(msg,":")
+	Local break2%=Instr(msg,":",break1+1)
+
+	Return Mid(msg,break2+1)
+End Function
+
+Function GetFromNick$(msg$)
+	Return Mid(msg,Instr(msg,":")+1,(Instr(msg,"!")-Instr(msg,":")-1))
+End Function
+
+Function GetFromTo$(msg$,sChr$,sCnt%,eChr$,eCnt%)
+	Local cStart%=FindBreak(msg,sCnt,sChr):If Not cStart cStart=1
+	Local cEnd%=FindBreak(msg,eCnt,eChr)
+	
+	Return Mid(msg,cStart,cEnd-cStart)
+End Function
+
+Function GetPar$(msg$,par%=0,bChr$=" ")
+	Local sbreak%=1,ebreak%
+	
+	For i=0 To par
+		If Instr(msg,bChr,sbreak+1)
+			sbreak=Instr(msg,bChr,sbreak+1)
+		Else
+			Exit
+		EndIf
+	Next
+	
+	ebreak=Instr(msg,bChr,sbreak+1)
+	If ebreak
+		Return Mid(msg,sbreak+1,ebreak-sbreak-1)
+	Else
+		Return Mid(msg,sbreak+1)
+	EndIf
+End Function
+
+;-----------------NETFUNCTIONS
+Function HandleMessages()	;Deal with all the messages that were received this frame.
+	For msg.MsgInfo = Each MsgInfo	;MsgInfo is the type list BlitzPlay uses for received packets
+		Select msg\msgType			;Check against the msgType
+			Case BP_PLAYERHASJOINED	
+				;Someone joined!
+				If msg\msgfrom <> 1 Then
+					p.pdata = CreatePlayer(msg\msgData, msg\msgFrom)
+					visibleMessageAdd(" joined.",p\Name,1,$ffffff,$ffffff) 
+					
+					
+	            EndIf                              
+    	        ;p\entity = LoadAnimMesh("models\run.b3d")
+
+        	Case BP_PLAYERHASLEFT          ;Someone left! 
+            	p.pdata = FindPdata(msg\msgFrom) 
+                If p<>Null Then  
+					visibleMessageAdd(" left the world.",p\Name,1,$ffffff,$ffffff)
+                	FreeEntity (p\entity) 
+					
+;					DeleteFile p\name+".png"
+                    Delete p
+                EndIf
+        	Case BP_HOSTHASLEFT			;The host left, lets close down the game.
+				For p.pdata = Each pdata
+					Delete p
+					DeleteFile p\name+".png"
+				Next
+				BP_EndSession ()
+				End
+			Case 1		;A positional update
+				p.pdata = FindPdata(msg\msgFrom)
+				
+				If p<>Null Then			;error check to make sure this person is in the game		
+					;PositionEntity p\entity,p\packetx,p\packety,p\packetz
+					p\x=EntityX(p\entity)
+					p\y=EntityY(p\entity)
+					p\z=EntityZ(p\entity)
+					
+				    p\packetx# = BP_StrToFloat(Mid$(msg\msgData,1,4))
+					p\packety# = BP_StrToFloat(Mid$(msg\msgData,5,4))
+					p\packetz# = BP_StrToFloat(Mid$(msg\msgData,9,4))
+										
+					newyaw#=BP_StrToFloat(Mid$(msg\msgData,13,4))
+
+					PositionEntity temppivot,p\packetx,p\packety,p\packetz
+					RotateEntity temppivot,0,newyaw+180,0
+					;spd#=EntityDistance (p\entity,temppivot)/2.0
+					;MoveEntity temppivot,0,spd,0
+					
+								
+					
+					x2# =EntityX(temppivot)
+					z2# =EntityZ(temppivot)
+
+					;PositionEntity temppivot,p\x,p\y,p\z
+					;RotateEntity temppivot,0,EntityYaw(p\entity),0
+					;MoveEntity temppivot,0,spd,0
+					;x1#=EntityX(temppivot)
+					;z1#=EntityZ(temppivot)
+					;
+					p\yaw=newyaw
+
+										
+					p\lasttime=MilliSecs()-p\packettime
+					;If ani\id=1 Then DebugLog ani\lasttime
+					p\packettime=MilliSecs()
+					
+					If p\initialized=False Then
+						p\x=p\packetx
+						p\y=p\packety
+						p\z=p\packetz
+						x1=p\packetx
+						x2=p\packetx
+						z1=p\packetz
+						z2=p\packetz
+						p\packettime=MilliSecs()
+						p\lasttime=250
+						PositionEntity p\entity,p\x,p\y,p\z
+						p\initialized=True
+					EndIf
+					
+					;BP_Initspline (p\splineid,p\x,p\z,x1,z1,x2,z2,p\packetx,p\packetz)
+					
+					
+					RotateEntity p\entity,0,p\yaw,0
+					p\dataused=False
+			
+					DebugLog "PACKET IN:" + p\net_id +" - " + p\packetx + "," + p\packetz + " -- " + p\x + "," + p\z
+					
+				End If	
+				
+				
+          	Case 4    
+            	p.pdata=FindpData(msg\msgFrom)
+            	p\model = Mid$(msg\msgData,1,4) ;Mid$(msg\msgData,Len(msg\msgData)-1,1)
+                p\sex = Mid$(msg\msgData,5,4) ;Mid$(msg\msgData,Len(msg\msgData),1)
+
+			Case 5
+			
+     	  		tUID$=Left(msg\msgData,Instr(msg\msgData,":")) 
+      	  		tMsg$=Mid(msg\msgData,Instr(msg\msgData,":")+1) 
+				
+				If msg\msgfrom = 1 Then
+					
+					If Left(msg\msgdata,7)="SYSTEM:" And Instr(msg\msgdata,"was kicked")>0 Then
+						
+						;a player was kicked, remove his model
+						visibleMessageAdd(tMsg$,tUID$,0,$ffffff,$ffffff) 
+						tempmsg$=msg\msgdata
+						tempmsg = Replace (tempmsg,"SYSTEM:","")
+						tempmsg = Replace (tempmsg," was kicked.","")
+					
+						If myname=tempmsg Then End
+						For kp.pdata = Each pdata
+							If kp\name = tempmsg Then
+								FreeEntity (kp\entity) 
+	                        	DeleteFile kp\name+".png"
+								Delete kp
+							EndIf
+						Next
+					EndIf
+					;copied from below
+					If Left(msg\msgdata,7)="SYSTEM:" Or Left(msg\msgdata,3)="|A:"
+						;hmmm
+						;server message don't display in chat
+						visibleMessageAdd(tMsg$,tUID$,0,$ffffff,$ffffff) 
+					EndIf	
+				Else
+					If Left(msg\msgdata,7)="SYSTEM:" Or Left(msg\msgdata,3)="|A:"
+						;hmmm
+						;server message don't display in chat
+					visibleMessageAdd(tMsg$,tUID$,0,$ffffff,$ffffff)
+
+					Else
+						visibleMessageAdd(tMsg$,tUID$,0,$ffffff,$ffffff) 
+					EndIf
+				EndIf	
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					;COLLECT PLAYER POSITION FROM SERVER
+; 
+;					If Left(msg\msgdata,11)="SYSTEM:PLPS"
+;						playerpos$=Replace(msg\msgdata,"SYSTEM:PLPS ","")
+;						DebugLog "PLAYER WARPED TO " + playerpos
+;						axis=0
+;						For icount = 1 To Len(playerpos)
+;							If Mid$(playerpos,icount,1)="-" Then 
+;								Select axis
+;									Case 0
+;										;X axis
+;										newposx#=Left(playerpos,icount-1)
+;										nextstartpos=icount+1
+;										axis=1
+;									Case 1
+;										;Y axis
+;										newposy#=Mid(playerpos,nextstartpos,(icount-nextstartpos)-1)
+;										newposz#=Mid(playerpos,icount+1)
+;								End Select
+;							EndIf
+;						Next
+;						PositionEntity player_pivot,newposx,newposy+5,newposz
+;					EndIf
+					
+			Case 6
+				;we just arrived on the zone, get initial position from server
+				initx# = BP_StrToFloat(Mid$(msg\msgData,1,4))
+				inity# = BP_StrToFloat(Mid$(msg\msgData,5,4))
+				initz# = BP_StrToFloat(Mid$(msg\msgData,9,4))
+				inityaw#=BP_StrToFloat(Mid$(msg\msgData,13,4))
+				model =  BP_StrToFloat(Mid$(msg\msgData,17,4))
+				mysex =  BP_StrToFloat(Mid$(msg\msgData,21,4))
+				health = BP_StrToFloat(Mid$(msg\msgData,25,4))
+				INITZone = BP_StrToFloat(Mid$(msg\msgData,29,4))
+						
+				PositionEntity player_pivot,initx#,inity#+5,initz#
+				RotateEntity player_pivot,0,inityaw,0
+				DebugLog "Got start coords of " + initx + "," + inity + "," + initz + ",yaw=" + inityaw
+				initilizedplayerposition=True
+			Case 7
+				;animals update
+				tix#=BP_StrToFloat(Mid(msg\msgdata,1,4))
+				tiz#=BP_StrToFloat(Mid(msg\msgdata,5,4))
+				tiy#=BP_StrToFloat(Mid(msg\msgdata,9,4))
+				tid= BP_StrToInt  (Mid(msg\msgdata,13))
+				updateanimalposition(tid,tix,tiz,tiy)
+			Case 8
+				;lightning
+				lx#=BP_StrToFloat(Mid(msg\msgdata,1,4))
+				lz#=BP_StrToFloat(Mid(msg\msgdata,5,4))
+				 Create_lightning(lx,lz,250,500,20) 
+			Case 9
+				;weather
+				weatherdensity$= BP_StrToFloat(Mid(msg\msgdata,1,4))
+				;DebugLog "weather = " + weatherdensity$
+			Case 10
+				;time of day			
+				If Left(msg\msgdata,1)="T" Then
+					gGameTime=Mid(msg\msgdata,2)
+					gservertime=ggametime
+					;DebugLog "TIME SET TO " + convertGameTime()
+				Else
+					gdate=Mid(msg\msgdata,2)
+					;DebugLog "CURRENT DATE SET TO " + gdate
+				EndIf
+		End Select
+		Delete msg
+	Next
+End Function
+
+Function Info(t$,set%)
+	i.Info = New Info
+	i\txt$ = t$
+	i\set% = set%
+	Insert i Before First Info
+End Function
+
+Function irc_log(iText$,iColor=$FFFFFF,from$="",fColor=$3399FF)
+	Local i=0
+	action$=GetAction(iText)
+
+	If action<>""
+		itext=action
+		action=1
+	EndIf
+
+	visibleMessageAdd(itext,from,action,icolor,fcolor)
+End Function
+
+Function LeaveZone()
+FreeEntity terrain
+
+For o.obj = Each  obj
+If o\entity > 0 Then
+FreeEntity o\entity
+;o\entity = 0;added by me
+EndIf
+
+Next
+
+;For p.pdata = Each pdata
+;FreeEntity p\entity
+;Next
+
+FreeTexture tex2
+FreeTexture grass
+End Function
+
+Function loadnpc(ZoneID)
+npcloadfile = ReadFile("Char\Data\"+ZoneID+"\npc.dat")
+While Not Eof(npcloadfile) 
+n.npcs = New npcs
+	n\name = ReadLine(npcloadfile)
+	model$ = ReadLine(npcloadfile)
+	;n\splineID = BP_CreateSpline()
+	n\entity = LoadMesh("Media\models\Player\Spectre\Spectre.3DS")
+	ScaleEntity n\entity,2.3,2.3,2.3
+	EntityType n\entity,2
+    createtext(n\name,n\entity)
+    n\namesprite = 1
+    n\x# = ReadLine(npcloadfile)
+    n\z# = ReadLine(npcloadfile)
+    terheight= TerrainHeight(Terrain,n\x#,n\z#) 
+	spoty#=TerrainY(Terrain,n\x#,terheight,n\z#)
+    PositionEntity n\entity,n\x#,65,n\z#,True
+    n\SIDE = ReadLine(npcloadfile)
+    n\speed = ReadLine(npcloadfile)
+Wend
+CloseFile(npcloadfile)
+End Function
+
+;---------------------lookcam Function-------------------------
+Function CurveValue#(current#,destination#,curve)
+	current#=current#+((destination#-current#)/curve)
+	Return current#
+End Function
+
+Function MouseArea(x, y, width, height)
+	If MouseX() >= x And MouseX() <= x + width
+		If MouseY() >= y And MouseY() <= y + height
+			Return True
+		Else
+			Return False
+		End If
+	Else
+		Return False
+	End If
+
+End Function
+;---------------------------------------------------------------
+
+Function mainsplash()
+	splash1 = LoadImage ("media\gfx\splash\bpsplash.jpg")
+	GammaFade -5
+	DrawImage splash1,GraphicsWidth()/2 - (ImageWidth(splash1)/2),GraphicsHeight()/2 - ImageHeight(splash1)/2
+	GammaFade 5
+	Delay 2000
+	GammaFade -3
+	Cls
+	gammafade 3
+	FreeImage splash1
+End Function
+
+Function MakeSkyBox(file$)
+	m=CreateMesh()
+	;front face
+	b=LoadBrush( file$+"_FR.bmp",49 )
+	ss=CreateSurface( m,b )
+	AddVertex ss,-1,+1,-1,0,0:AddVertex ss,+1,+1,-1,1,0
+	AddVertex ss,+1,-1,-1,1,1:AddVertex ss,-1,-1,-1,0,1
+	AddTriangle ss,0,1,2:AddTriangle ss,0,2,3
+	FreeBrush b
+	;right face
+	b=LoadBrush( file$+"_LF.bmp",49 )
+	ss=CreateSurface( m,b )
+	AddVertex ss,+1,+1,-1,0,0:AddVertex ss,+1,+1,+1,1,0
+	AddVertex ss,+1,-1,+1,1,1:AddVertex ss,+1,-1,-1,0,1
+	AddTriangle ss,0,1,2:AddTriangle ss,0,2,3
+	FreeBrush b
+	;back face
+	b=LoadBrush( file$+"_BK.bmp",49 )
+	ss=CreateSurface( m,b )
+	AddVertex ss,+1,+1,+1,0,0:AddVertex ss,-1,+1,+1,1,0
+	AddVertex ss,-1,-1,+1,1,1:AddVertex ss,+1,-1,+1,0,1
+	AddTriangle ss,0,1,2:AddTriangle ss,0,2,3
+	FreeBrush b
+	;left face
+	b=LoadBrush( file$+"_RT.bmp",49 )
+	ss=CreateSurface( m,b )
+	AddVertex ss,-1,+1,+1,0,0:AddVertex ss,-1,+1,-1,1,0
+	AddVertex ss,-1,-1,-1,1,1:AddVertex ss,-1,-1,+1,0,1
+	AddTriangle ss,0,1,2:AddTriangle ss,0,2,3
+	FreeBrush b
+	;top face
+	b=LoadBrush( file$+"_UP.bmp",49 )
+	ss=CreateSurface( m,b )
+	AddVertex ss,-1,+1,+1,0,1:AddVertex ss,+1,+1,+1,0,0
+	AddVertex ss,+1,+1,-1,1,0:AddVertex ss,-1,+1,-1,1,1
+	AddTriangle ss,0,1,2:AddTriangle ss,0,2,3
+	FreeBrush b
+
+	ScaleMesh m,1700,1700,1700
+	FlipMesh m
+	EntityFX m,1
+	Return m
+
+End Function
+
+Function moveanimals()
+	playx#=EntityX(player_pivot) 
+	playz#=EntityZ(player_pivot)
+	For ani.animal=Each animal
+		anix#=EntityX(ani\entity)
+		aniz#=EntityZ(ani\entity)
+		
+		anitime#=(MilliSecs()-ani\timestamp)/(ani\lasttime*1.0)
+		
+;		If ani\id=1 Then DebugLog anitime
+
+	If ani\distancetoplayer<400
+			
+			
+			;If anitimet>1 Then anitime=1.0
+			;terhieght= TerrainHeight(terrain,anix,aniz) 
+			;spoty#=TerrainY(terrain,anix,terhieght,aniz)
+			
+			;PositionEntity ani\entity,BP_GetSplineX# (ani\SplineID, anitime),spoty,BP_GetSpliney# (ani\SplineID, anitime)
+			;thisyaw#=ATan2(EntityX(ani\entity)-anix,EntityZ(ani\entity)-aniz)
+			;RotateEntity ani\entity,0,360-thisyaw,0;360-ani\yaw,0,True	
+		;Else
+			;If EntityY(ani\entity)<meshterrain_height(EntityX(ani\entity),EntityZ(ani\entity))+5
+		     ;  PositionEntity ani\entity,EntityX(ani\entity),meshterrain_height(EntityX(ani\entity),EntityZ(ani\entity))+5,EntityZ(ani\entity)
+	        ;EndIf
+			
+			
+			PositionEntity temppivot,ani\packetx,ani\packety,ani\packetz
+
+						
+			distAni# = EntityDistance (ani\entity, temppivot)
+			
+			If distAni# > 0.5
+			
+			PointEntity ani\entity, temppivot
+			
+			MoveEntity ani\entity, 0,0,0.5
+			
+			
+			EndIf
+
+			
+			;PositionEntity ani\entity,ani\packetx,spoty#,ani\packetz
+		
+		
+		
+		
+		
+		
+		
+		;EndIf
+	EndIf
+	
+	Next
+End Function
+
+Function moveplayers()
+	For p.pdata=Each pdata
+	;	If p\nomovement=True Then
+	;		;player hasn't moved, don't use spline
+	;		terhieght= TerrainHeight(terrain,EntityX(p\entity),EntityZ(p\entity)) 
+	;		spoty#=TerrainY(terrain,EntityX(p\entity),terhieght,EntityZ(p\entity))
+	;		PositionEntity p\entity,p\x,spoty,p\z
+	;		If p\name="Miles" Then DebugLog "no movement"
+	;	Else
+			;movement, use spline
+			
+			;anitime#=(MilliSecs()-p\packettime)/(p\lasttime*1.0)
+			;If anitimet>1 Then 
+			;	anitime=1.0
+				;PositionEntity p\entity,p\packetx,p\packety,p\packetz
+				
+			;camm change
+			
+			PositionEntity temppivot,p\packetx,p\packety,p\packetz
+
+			distPL# = EntityDistance (p\entity, temppivot)
+			
+			If distPL > 0.5
+			
+			PointEntity p\entity, temppivot
+			
+			
+			
+			MoveEntity p\entity, 0,0,0.5
+			
+						
+			EndIf
+			
+				
+					
+			;Else
+				
+			;	newx#=BP_GetSplineX# (p\SplineID, anitime)
+			;	newz#=BP_GetSpliney# (p\SplineID, anitime)
+			
+			;	terheight= TerrainHeight(terrain,newx,newz) 
+			;	spoty#=TerrainY(terrain,newx,terheight,newz)
+			;	PositionEntity p\entity,newx,p\packety-2,newz
+			;EndIf
+			;DebugLog "SPLINES CLC:" + p\net_id +" - " + p\x + "," + p\z + " - " + newx + "," + newz
+		;rotate player to current facing
+		RotateEntity p\entity,0,p\yaw,0	
+		EntityAutoFade p\entity,300,1000
+	Next
+End Function
+
+Function ParseAction$(msg$)
+	If Upper(Left(msg,4))="/ME "
+		action$=Mid(msg,4)
+		If Len(action)>1
+			Return Chr(1)+"ACTION"+action+Chr(1)
+		Else
+			Return msg
+		EndIf
+	Else
+		Return msg
+	EndIf
+End Function
+
+Function control_playerMove()
+
+
+
+
+	If initilizedplayerposition=False Then Return ;dont move until player has been positioned
+			;***forward And backward ***
+	
+	CP_Z= 0
+	CP_X= 0
+	CP_y=0
+	If autowalk = 1 Then
+	CP_Z = WalkSpeed#
+	moved=15
+    EndIf
+   
+	If KeyDown(200) Then 
+		wanttoleave=False
+	    moved=15
+		CP_Z = WalkSpeed#
+	ElseIf KeyDown(208) Then
+		wanttoleave=False
+		moved=15
+	  	CP_Z = -WalkSpeed#
+	EndIf
+	
+	If KeyHit(207) Then
+	autowalk = Not autowalk
+	EndIf
+	
+	
+	If KeyDown(54) Then							;Walk key (Right Shift)
+		WalkSpeed# = .2
+	Else
+		WalkSpeed# = .5
+	EndIf
+
+	;***  left and right ***
+	If KeyDown(203) Then 
+		wanttoleave=False
+		CP_X = -WalkSpeed#
+	ElseIf KeyDown(205) Then 
+		wanttoleave=False
+		CP_X = WalkSpeed#
+	EndIf
+	
+	If MouseHit(2) Then 
+	 CP_Y = 1
+	EndIf
+	
+	If KeyDown(157) =1 And Jumped =0				;Jump (Right Ctrl)
+		PlayerGravity# = 2
+		Jumped =1
+	EndIf
+
+	;first/third person views
+	If KeyHit(5) Then 
+		ShowEntity player
+		PositionEntity camera,0,5,-10
+	EndIf
+	
+	If KeyHit(6) Then 
+		PositionEntity camera,0,2.5,-3
+		HideEntity player
+	EndIf
+	
+	MoveEntity player_pivot,CP_X,CP_Y,CP_Z
+	
+	 playerx#=EntityX(player_pivot,True)
+	 playerz#=EntityZ(player_pivot,True)
+	
+	terheight= TerrainHeight(Terrain, playerx#, playerz#) 
+	spoty#=TerrainY(Terrain, playerx#,terheight, playerz#)
+  If EntityY(player_pivot) < -100 Then 
+	PositionEntity player_pivot,playerx#,spoty#+80, playerz#
+  EndIf	
+	;make sure player model sits on ground properly
+	
+	If EntityCollided( player_pivot, 1)
+			;do nothing if player is in contact with terrain
+			PlayerGravity# = 0.0
+			Jumped =0
+		Else
+			PlayerGravity# = PlayerGravity# - Gravity#
+		EndIf
+;PositionEntity player,EntityX(player_pivot),EntityY(player_pivot),EntityZ(player_pivot)
+TranslateEntity player_pivot,0,PlayerGravity#,0
+End Function
+

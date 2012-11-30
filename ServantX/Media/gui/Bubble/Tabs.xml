@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="ANSI"?>
+<AlbaLynx>
+	<!-- =========================================== -->
+	<!-- Default template of "TabContainer" -->
+	<template Name="TabContainer">
+		<!-- The title of TabContainer. Vertical collision is enabled -->
+		<primitive Name="Caption" Type="Text" Height="-1" Margin="0 0 0 10" Collision="2">
+			<color AllCorners="55 60 65 255" />
+		</primitive>
+		<!-- The horizontal line of tabs. Vertical collision with the title is enabled -->
+		<primitive Name="Tabs" Type="Dummy" Height="26" Margin="0 0 -2 10" Collision="2">
+			<default ChildTemplate="TabButton" />
+		</primitive>
+		<!-- Dummy -->
+		<primitive Type="Dummy" Collision="2">
+			<!-- Background color -->
+			<primitive Name="bg_color" Type="Texture_9" Margin="2">
+				<color TopLeft="220 230 240 255" TopRight="220 230 240 255" BottomLeft="168 178 188 255" BottomRight="168 178 188 255" />
+				<texture
+					Image="BubbleSkin"
+					Border="2"
+					TexX_All="0		2	4	6"
+					TexY_All="88	90	92	94"
+				/>
+			</primitive>
+			<!-- Border -->
+			<primitive Name="Border" Type="Texture_9">
+				<texture
+					Image="BubbleSkin"
+					Border="5"
+					TexX_All="137	142		160		165"
+					TexY_All="90	95		113		118"
+				/>
+			</primitive>
+			<!-- Position of the daughter elements. -->
+			<primitive Name="Children" Type="Dummy" Margin="2">
+				<default ChildTemplate="Tab" />
+			</primitive>
+		</primitive>
+	</template>
+
+	<!-- =========================================== -->
+	<!-- Template for a "TabContainer" with a vertical list -->
+	<template Name="TabContainerV">
+		<!-- The title of TabContainer. Vertical collision is enabled -->
+		<primitive Name="Caption" Type="Text" Height="-1" Margin="0 0 0 10" Collision="2">
+			<color AllCorners="55 60 65 255" />
+		</primitive>
+		<primitive Name="Body" Type="Dummy" Collision="2">
+			<!-- The horizontal line of tabs. Vertical collision with the title is enabled -->
+			<primitive Name="Tabs" Type="Dummy" Width="-1" Collision="1" Margin="10 -2 0 0">
+				<default ChildTemplate="TabButtonV" Vertical="True" />
+			</primitive>
+			<!-- Dummy -->
+			<primitive Type="Dummy" Collision="1">
+				<!-- Background color -->
+				<primitive Name="bg_color" Type="Texture_9" Margin="2">
+					<color TopLeft="220 230 240 255" TopRight="220 230 240 255" BottomLeft="168 178 188 255" BottomRight="168 178 188 255" />
+					<texture
+						Image="BubbleSkin"
+						Border="2"
+						TexX_All="0		2	4	6"
+						TexY_All="88	90	92	94"
+					/>
+				</primitive>
+				<!-- Border -->
+				<primitive Name="Border" Type="Texture_9">
+					<texture
+						Image="BubbleSkin"
+						Border="5"
+						TexX_All="137	142		160		165"
+						TexY_All="90	95		113		118"
+					/>
+				</primitive>
+				<!-- Position of the daughter elements. -->
+				<primitive Name="Children" Type="Dummy" Margin="2">
+					<default ChildTemplate="Tab" />
+				</primitive>
+			</primitive>
+		</primitive>
+	</template>
+
+	<!-- ============================================= -->
+	<!-- Default template for "Tab" element -->
+	<template Name="Tab">
+		<!-- The content + horizontal scrollbar. Horizontal collision with the vertical scrollbar is enabled -->
+		<primitive Name="BodyLeft" Type="Dummy" Collision="1">
+			<!-- Position of the daughter elements. Vertical collision with the horizontal scrollbar is enabled. Activity zone for daughter elements is necessarily enabled -->
+			<primitive Name="Children" Type="Dummy" Zone="Rect" Margin="1" Collision="2" />
+			<!-- Position of the horizontal scrollbar. Vertical collision with daughter elements is enabled -->
+			<primitive Name="ScrollH" Type="Dummy" Height="26" Margin="-1 0 0" Collision="2">
+				<default ChildTemplate="ScrollBarH_Embedded_2" />
+			</primitive>
+		</primitive>
+		<!-- Position of the vertical scrollbar. Horizontal collision with daughter elements etc is enabled -->
+		<primitive Name="ScrollV" Type="Dummy" Width="26" Margin="0 0 0 -1" Collision="1">
+			<default ChildTemplate="ScrollBarV_Embedded_2" />
+		</primitive>
+	</template>
+
+	<!-- ============================================= -->
+	<!-- Default template for "TabButton" element -->
+	<template Name="TabButton">
+		<!-- Background Passive -->
+		<primitive Name="Passive" Type="Rect" Margin="2 2 0 2">
+			<state Type="Partial" Negative="Locked | Active | Checked" />
+			<color TopLeft="#77ffffff" TopRight="#77ffffff" BottomLeft="#77dadfe4" BottomRight="#77dadfe4" />
+		</primitive>
+		<!-- Background Active -->
+		<primitive Name="Active" Type="Rect" Margin="2 2 0 2">
+			<state Type="Partial" Positive="Active" Negative="Locked | Checked" />
+			<color TopLeft="#ffffffff" TopRight="#ffffffff" BottomLeft="#ffdadfe4" BottomRight="#ffdadfe4" />
+		</primitive>
+		<!-- Background Checked -->
+		<primitive Name="Checked" Type="Rect" Margin="2 2 0 2">
+			<state Type="Partial" Positive="Checked" Negative="Locked" />
+			<color TopLeft="#ffdadfe4" TopRight="#ffdadfe4" BottomLeft="#ffffffff" BottomRight="#ffffffff" />
+		</primitive>
+		<!-- Border -->
+		<primitive Name="Border" Type="Texture_9" Height="26">
+			<texture
+				Image="BubbleSkin"
+				Border="5 5 1 5"
+				TexX_All="137	142		160		165"
+				TexY_All="90	95		113		114"
+			/>
+		</primitive>
+		<!-- The icon of TabButton -->
+		<primitive Name="Icon" Type="Icon" Width="16" Height="16" Margin="0 -4 0 8" Align="Left Center" Collision="1" />
+		<!-- The title of TabButton -->
+		<primitive Name="Caption" Type="Text" Width="-1" Margin="0 8" Collision="1">
+			<color AllCorners="55 60 65 255" />
+			<text Align="left center" />
+		</primitive>
+	</template>
+
+		<!-- ============================================= -->
+	<!-- Default template for "TabButton" element -->
+	<template Name="TabButtonV">
+		<!-- Background Passive -->
+		<primitive Name="Passive" Type="Rect" Margin="2 0 2 2">
+			<state Type="Partial" Negative="Locked | Active | Checked" />
+			<color TopLeft="#77ffffff" TopRight="#77ffffff" BottomLeft="#77dadfe4" BottomRight="#77dadfe4" />
+		</primitive>
+		<!-- Background Active -->
+		<primitive Name="Active" Type="Rect" Margin="2 0 2 2">
+			<state Type="Partial" Positive="Active" Negative="Locked | Checked" />
+			<color TopLeft="#ffffffff" TopRight="#ffffffff" BottomLeft="#ffdadfe4" BottomRight="#ffdadfe4" />
+		</primitive>
+		<!-- Background Checked -->
+		<primitive Name="Checked" Type="Rect" Margin="2 0 2 2">
+			<state Type="Partial" Positive="Checked" Negative="Locked" />
+			<color TopLeft="#ffdadfe4" TopRight="#ffdadfe4" BottomLeft="#ffffffff" BottomRight="#ffffffff" />
+		</primitive>
+		<!-- Border -->
+		<primitive Name="Border" Type="Texture_9" Height="30">
+			<texture
+				Image="BubbleSkin"
+				Border="5 1 5 5"
+				TexX_All="137	142		160		161"
+				TexY_All="90	95		113		118"
+			/>
+		</primitive>
+		<!-- The icon of TabButton -->
+		<primitive Name="Icon" Type="Icon" Width="16" Height="16" Margin="0 -2 0 6" Align="Left Center" Collision="1" />
+		<!-- The title of TabButton -->
+		<primitive Name="Caption" Type="Text" Width="-1" Margin="0 4 0 6" Collision="1">
+			<color AllCorners="55 60 65 255" />
+			<text Align="left center" />
+		</primitive>
+	</template>
+</AlbaLynx>

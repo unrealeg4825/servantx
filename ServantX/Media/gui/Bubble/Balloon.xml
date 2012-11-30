@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="ANSI"?>
+<AlbaLynx>
+	<!-- =========================================== -->
+	<!-- Default template of "Balloon" -->
+	<!-- Шаблон *по умолчанию* для элемента "Balloon" -->
+	<template Name="Balloon" Zone="None">
+		<!-- Window color -->
+		<primitive Name="bg_color" Type="Texture_9" Margin="7">
+			<color TopLeft="220 230 240 255" TopRight="220 230 240 255" BottomLeft="168 178 188 255" BottomRight="168 178 188 255" />
+			<texture
+				Image="BubbleSkin"
+				Border="6"
+				TexX_All="0		6	8	14"
+				TexY_All="72	78	80	86"
+			/>
+		</primitive>
+		<!-- The frame and the shadow -->
+		<primitive Name="BorderShadow" Type="Dummy" Margin="1 -3 -7">
+			<!-- Corners -->
+			<primitive Type="Texture" Width="20" Height="16" Align="Left Top">
+				<texture Image="BubbleSkin" XYWH="0 186 20 16" />
+			</primitive>
+			<primitive Type="Texture" Width="20" Height="24" Align="Left Bottom">
+				<texture Image="BubbleSkin" XYWH="0 232 20 24" />
+			</primitive>
+			<primitive Type="Texture" Width="20" Height="16" Align="Right Top">
+				<texture Image="BubbleSkin" XYWH="50 186 20 16" />
+			</primitive>
+			<primitive Type="Texture" Width="20" Height="24" Align="Right Bottom">
+				<texture Image="BubbleSkin" XYWH="50 232 20 24" />
+			</primitive>
+			<primitive Name="Center" Type="Texture" Margin="16 11 24">
+				<texture Image="BubbleSkin" XYWH="12 202 46 30" />
+			</primitive>
+			<!-- Empty edges -->
+			<primitive Name="Empty_Left" Type="Texture" Margin="16 0 24" Width="11">
+				<texture Image="BubbleSkin" XYWH="0 202 11 30" />
+			</primitive>
+			<primitive Name="Empty_Right" Type="Texture" Margin="16 0 24" Width="11" Align="Right">
+				<texture Image="BubbleSkin" XYWH="59 202 11 30" />
+			</primitive>
+			<primitive Name="Empty_Top" Type="Texture" Margin="0 20" Height="16">
+				<texture Image="BubbleSkin" XYWH="20 186 30 16" />
+			</primitive>
+			<primitive Name="Empty_Bottom" Type="Texture" Margin="0 20" Height="24" Align="Bottom">
+				<texture Image="BubbleSkin" XYWH="20 232 30 24" />
+			</primitive>
+			<!-- Arrow on edges -->
+			<primitive Name="Container_Left" Type="Dummy" Margin="16 -4 24" Width="15">
+				<default ArrowSize="18" ArrowCenter="5" />
+				<!-- Offset -->
+				<primitive Name="Offset_Left" Type="Texture" Collision="2">
+					<texture Image="BubbleSkin" XYWH="178 197 15 9" />
+				</primitive>
+				<!-- Arrow background -->
+				<primitive Type="Dummy" Height="18" Collision="2">
+					<!-- Arrow background -->
+					<primitive Name="bg_color_Left" Type="Texture" Width="7" Height="11" Margin="0 7" Align="Left Top">
+						<color AllCorners="195 205 215 255" />
+						<texture Image="BubbleSkin" XYWH="70 238 7 11" />
+					</primitive>
+					<!-- Arrow -->
+					<primitive Name="Arrow_Left" Type="Texture">
+						<texture Image="BubbleSkin" XYWH="178 206 15 18" />
+					</primitive>
+				</primitive>
+				<!-- Rest of edge -->
+				<primitive Name="Rest_Left" Type="Texture" Collision="2">
+					<texture Image="BubbleSkin" XYWH="178 224 15 3" />
+				</primitive>
+			</primitive>
+			<primitive Name="Container_Right" Type="Dummy" Margin="16 -4 24" Width="15" Align="Right">
+				<default ArrowSize="18" ArrowCenter="5" />
+				<!-- Offset -->
+				<primitive Name="Offset_Right" Type="Texture" Collision="2">
+					<texture Image="BubbleSkin" XYWH="241 197 15 9" />
+				</primitive>
+				<!-- Arrow -->
+				<primitive Type="Dummy" Height="18" Collision="2">
+					<!-- Arrow background -->
+					<primitive Name="bg_color_Right" Type="Texture" Width="7" Height="11" Margin="0 7" Align="Right Top">
+						<color AllCorners="195 205 215 255" />
+						<texture Image="BubbleSkin" XYWH="88 238 7 11" />
+					</primitive>
+					<!-- Arrow -->
+					<primitive Name="Arrow_Right" Type="Texture">
+						<texture Image="BubbleSkin" XYWH="241 206 15 18" />
+					</primitive>
+				</primitive>
+				<!-- Rest of edge -->
+				<primitive Name="Rest_Right" Type="Texture" Collision="2">
+					<texture Image="BubbleSkin" XYWH="241 224 15 3" />
+				</primitive>
+			</primitive>
+			<primitive Name="Container_Top" Type="Dummy" Margin="-6 20 0" Height="22" Align="Top">
+				<default ArrowSize="21" />
+				<!-- Offset -->
+				<primitive Name="Offset_Top" Type="Texture" Collision="1">
+					<texture Image="BubbleSkin" XYWH="202 175 4 22" />
+				</primitive>
+				<!-- Arrow -->
+				<primitive Type="Dummy" Width="21" Collision="1">
+					<!-- Arrow background -->
+					<primitive Name="bg_color_Top" Type="Texture" Height="7" Margin="5">
+						<color AllCorners="220 230 240 255" />
+						<texture Image="BubbleSkin" XYWH="77 231 11 7" />
+					</primitive>
+					<!-- Arrow -->
+					<primitive Name="Arrow_Top" Type="Texture">
+						<texture Image="BubbleSkin" XYWH="206 175 21 22" />
+					</primitive>
+				</primitive>
+				<!-- Rest of edge -->
+				<primitive Name="Rest_Top" Type="Texture" Collision="1">
+					<texture Image="BubbleSkin" XYWH="227 175 4 22" />
+				</primitive>
+			</primitive>
+			<primitive Name="Container_Bottom" Type="Dummy" Margin="0 20 -5" Height="29" Align="Bottom">
+				<default ArrowSize="21" />
+				<!-- Offset -->
+				<primitive Name="Offset_Bottom" Type="Texture" Collision="1">
+					<texture Image="BubbleSkin" XYWH="202 227 4 29" />
+				</primitive>
+				<!-- Arrow -->
+				<primitive Type="Dummy" Width="21" Collision="1">
+					<!-- Arrow background -->
+					<primitive Name="bg_color_Bottom" Type="Texture" Height="7" Margin="12 5" Align="Bottom">
+						<color AllCorners="168 178 188 255" />
+						<texture Image="BubbleSkin" XYWH="77 249 11 7" />
+					</primitive>
+					<!-- Arrow -->
+					<primitive Name="Arrow_Bottom" Type="Texture">
+						<texture Image="BubbleSkin" XYWH="206 227 21 29" />
+					</primitive>
+				</primitive>
+				<!-- Rest of edge -->
+				<primitive Name="Rest_Bottom" Type="Texture" Collision="1">
+					<texture Image="BubbleSkin" XYWH="227 227 4 29" />
+				</primitive>
+			</primitive>
+		</primitive>
+		<!-- The body of the window. Vertical collision with the title is enabled -->
+		<primitive Name="Body" Type="Dummy" Margin="9">
+			<!-- The title of the window -->
+			<primitive Name="Caption" Type="Text" Margin="5 15" Width="-1" Height="-1" Collision="1">
+				<color AllCorners="55 60 65 255" />
+				<text WordWrap="True" />
+			</primitive>
+		</primitive>
+	</template>
+</AlbaLynx>

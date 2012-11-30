@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="ANSI"?>
+<AlbaLynx>
+	<template Name="Desktop">
+		<!-- Position of the daughter elements. Activity zone for daughter elements is necessarily enabled -->
+		<primitive Name="Children" Type="Dummy" Zone="Rect" />
+		<!-- The title.  -->
+		<primitive Name="Caption" Type="Text" Margin="0 0 5 10" >
+			<text Align="Left Bottom" />
+		</primitive>
+	</template>
+</AlbaLynx>

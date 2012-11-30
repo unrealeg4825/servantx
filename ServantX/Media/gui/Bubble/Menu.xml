@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="ANSI"?>
+<AlbaLynx>
+	<!-- ============================================ -->
+	<!-- Default template for "Menu" element -->
+	<template Name="Menu">
+		<!-- Background -->
+		<primitive Name="Background" Type="Texture_3" Height="35">
+			<texture
+				Image="BubbleSkin"
+				Border="4"
+				TexX_All="226 230 252 256"
+				TexY_All="0 35"
+			/>
+		</primitive>
+		<!-- Position of the list items -->
+		<primitive Name="Children" Type="Dummy" Zone="Rect" Margin="3 2 8 2" Collision="1">
+			<default ItemTemplate="MainMenuItem" />
+		</primitive>
+	</template>
+
+	<!-- ============================================ -->
+	<!-- Default template for "MainMenuSeparator" element -->
+	<template Name="MainMenuSeparator">
+		<!-- Line -->
+		<primitive Name="Line" Type="Rect" Margin="10% 2" Width="1">
+			<color AllCorners="#FF666666" />
+		</primitive>
+	</template>
+
+	<!-- ============================================= -->
+	<!-- Additional template for "MenuItem" element -->
+	<template Name="MainMenuItem">
+		<primitive Type="Dummy" Height="24">
+			<!-- Active -->
+			<primitive Name="Active" Type="Texture_3">
+				<state Type="Partial" Positive="Active" Negative="Locked | Pressed | InFocusC" />
+				<texture
+					Image="BubbleSkin"
+					Border="6"
+					TexX_All="189 195 207 213"
+					TexY_All="38 62"
+				/>
+			</primitive>
+			<!-- Checked -->
+			<primitive Name="Opened" Type="Texture_3">
+				<state Type="Partial" Positive="InFocusC" Negative="Locked | Pressed" />
+				<texture
+					Image="BubbleSkin"
+					Border="6"
+					TexX_All="215 221 233 239"
+					TexY_All="38 62"
+				/>
+			</primitive>
+			<!-- Icon -->
+			<primitive Name="Icon" Type="Icon" Margin="0 -2 0 8" Width="24" Collision="1" />
+			<!-- Caption -->
+			<primitive Type="Dummy" Margin="0 8 0 8" Width="-1" Collision="1">
+				<!-- Common caption -->
+				<primitive Name="Caption" Type="Text" Width="-1">
+					<state Type="Partial" Negative="Locked" />
+					<text  Align="Left Center" />
+					<color AllCorners="210 215 220 255" />
+				</primitive>
+				<!-- Locked caption -->
+				<primitive Name="Caption" Type="Text" Width="-1">
+					<state Type="Partial" Positive="Locked" />
+					<text  Align="Left Center" />
+					<color AllCorners="110 110 110 255" />
+				</primitive>
+			</primitive>
+			<!-- Box for context menu -->
+			<primitive Name="ContextBox" Type="Dummy" Margin="-3 -2">
+				<default Open="2 0" ChildTemplate="MainContextMenu" />
+			</primitive>
+		</primitive>
+	</template>
+
+	<!-- ============================================ -->
+	<!-- Additional template for "ContextMenu" element -->
+	<template Name="MainContextMenu">
+		<!-- Background -->
+		<primitive Name="Background" Type="Texture_9" Margin="-1 -5 -6">
+			<texture
+				Image="BubbleSkin"
+				Border="1 12 13 12"
+				TexX_All="189 201 213 225"
+				TexY_All="10 11 23 36"
+			/>
+		</primitive>
+		<!-- Shadow -->
+		<primitive Name="Shadow" Type="Texture" Margin="-1 0 0" Height="5">
+			<texture
+				Image="BubbleSkin"
+				XYWH="236 30 10 5"
+			/>
+		</primitive>
+		<!-- Position of the list items -->
+		<primitive Name="Children" Type="Dummy" Zone="Rect" Margin="2 2 4 2" Collision="1">
+		</primitive>
+	</template>
+
+	<!-- ============================================ -->
+	<!-- Default template for "ContextMenu" element -->
+	<template Name="ContextMenu">
+		<!-- Background -->
+		<primitive Name="Background" Type="Texture_9" Margin="-4 -5 -6">
+			<texture
+				Image="BubbleSkin"
+				Border="11 12 13 12"
+				TexX_All="189 201 213 225"
+				TexY_All="0 11 23 36"
+			/>
+		</primitive>
+		<!-- Position of the list items -->
+		<primitive Name="Children" Type="Dummy" Zone="Rect" Margin="4 2">
+		</primitive>
+	</template>
+
+	<!-- ============================================ -->
+	<!-- Default template for "ContextMenuSeparator" element -->
+	<template Name="MenuSeparator">
+		<!-- Line -->
+		<primitive Name="Line" Type="Rect" Margin="2 10%" Height="2">
+			<color TopLeft="#FF626569" TopRight="#FF626569" BottomLeft="#FFdee2e5" BottomRight="#FFdee2e5" />
+		</primitive>
+	</template>
+
+	<!-- ============================================= -->
+	<!-- Default template for "MenuItem" element -->
+	<template Name="MenuItem">
+		<!-- Background active -->
+		<primitive Name="Active" Type="Rect" Margin="2 0">
+			<state Type="Partial" Positive="Active" Negative="Locked | InFocusC" />
+			<color TopLeft="#77ffffff" TopRight="#77ffffff" BottomLeft="#77dadfe4" BottomRight="#77dadfe4" />
+			<rect Fill="Yes" />
+		</primitive>
+		<!-- Background opened -->
+		<primitive Name="Opened" Type="Rect" Margin="2 0">
+			<state Type="Partial" Positive="InFocusC" Negative="Checked | Locked" />
+			<color TopLeft="#ffffffff" TopRight="#ffffffff" BottomLeft="#ffdadfe4" BottomRight="#ffdadfe4" />
+			<rect Fill="Yes" />
+		</primitive>
+		<!-- Border -->
+		<primitive Name="Border" Type="Texture_3" Height="27">
+			<state Type="PartialALO" Positive="Active | Pressed | InFocusC" Negative="Locked" />
+			<texture
+				Image="BubbleSkin"
+				Border="3"
+				TexX_All="139	142		159		162"
+				TexY_All="204	231"
+			/>
+		</primitive>
+		<!-- Icon -->
+		<primitive Name="Icon" Type="Icon" Margin="0 2 0 4" Width="24" Height="24" Align="Left Center">
+		</primitive>
+		<!-- Text -->
+		<primitive Name="Text" Type="Dummy" Margin="0 24 0 30">
+			<!-- Caption -->
+			<primitive Type="Dummy" Margin="0 0 0 8" Width="-1" Collision="1" Align="Left Center">
+				<!-- Common caption -->
+				<primitive Name="Caption" Type="Text" Width="-1">
+					<state Type="Partial" Negative="Locked" />
+					<text  Align="Left Center" />
+					<color AllCorners="55 60 65 255" />
+				</primitive>
+				<!-- Locked caption -->
+				<primitive Name="Caption" Type="Text" Width="-1">
+					<state Type="Partial" Positive="Locked" />
+					<text  Align="Left Center" />
+					<color AllCorners="105 110 115 255" />
+				</primitive>
+			</primitive>
+			<!-- Hotkey -->
+			<primitive Type="Dummy" Margin="0 0 0 10" Width="-1" Collision="1" Align="Right Center">
+				<!-- Common Hotkey -->
+				<primitive Name="Hotkey" Type="Text" Width="-1">
+					<state Type="Partial" Negative="Locked" />
+					<text Align="Left Center" Font="PT_Sans_Italic" />
+					<color AllCorners="55 60 65 255" />
+				</primitive>
+				<!-- Locked Hotkey -->
+				<primitive Name="Hotkey" Type="Text" Width="-1">
+					<state Type="Partial" Positive="Locked" />
+					<text Align="Left Center" Font="PT_Sans_Italic" />
+					<color AllCorners="105 110 115 255" />
+				</primitive>
+			</primitive>
+		</primitive>
+		<!-- SubmenuSymbol -->
+		<primitive Name="SubmenuSymbol" Type="Dummy" Margin="2 10 1" Width="4" Height="7" Align="Right Center">
+			<primitive Type="Texture">
+				<state Type="Partial" Negative="Locked" />
+				<color AllCorners="0 0 0 255" />
+				<texture Image="BubbleSkin" XYWH="40 108 4 7" />
+			</primitive>
+			<primitive Type="Texture">
+				<state Type="Partial" Positive="Locked" />
+				<color AllCorners="120 120 120 255" />
+				<texture Image="BubbleSkin" XYWH="40 108 4 7" />
+			</primitive>
+		</primitive>
+		<!-- Checked -->
+		<primitive Name="Checked" Type="Texture" Margin="1 3" Width="14" Height="11" Align="Right Center">
+			<state Type="Partial" Positive="Checked" />
+			<color AllCorners="0 0 0 150" />
+			<texture Image="BubbleSkin" XYWH="0 110 14 11" />
+		</primitive>
+		<!-- Box for context menu -->
+		<primitive Name="ContextBox" Type="Dummy" Margin="0">
+			<default Open="1 0" ChildTemplate="ContextMenu" />
+		</primitive>
+	</template>
+</AlbaLynx>
