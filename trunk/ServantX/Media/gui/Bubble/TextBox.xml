@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="ANSI"?>
+<AlbaLynx>
+	<!-- ============================================= -->
+	<!-- Default template of "TextBox" element -->
+	<template Name="TextBox">
+		<!-- The title of TextBox. Vertical collision with the body is enabled -->
+		<primitive Name="Caption" Type="Text" Height="-1" Margin="0 0 0 10" Collision="2">
+			<color AllCorners="55 60 65 255" />
+		</primitive>
+		<!-- The body of TextBox -->
+		<primitive Name="Body" Type="Dummy" Height="28" Collision="2">
+			<!-- Background color -->
+			<primitive Name="bg_color" Type="Texture_9" Margin="2">
+				<color AllCorners="255 255 255 255" />
+				<texture
+					Image="BubbleSkin"
+					Border="2"
+					TexX_All="0		2	4	6"
+					TexY_All="88	90	92	94"
+				/>
+			</primitive>
+			<!-- State: Passive -->
+			<primitive Name="Passive" Type="Texture_3">
+				<state Type="Partial" Negative="Locked | Active | InFocus | InFocusC" />
+				<texture
+					Image="BubbleSkin"
+					Border="5"
+					TexX_All="137	142		160		165"
+					TexY_All="0		28"
+				/>
+			</primitive>
+			<!-- State: Active -->
+			<primitive Name="Active" Type="Texture_3">
+				<state Type="PartialALO" Positive="Active | InFocus | InFocusC" Negative="Locked" />
+				<texture
+					Image="BubbleSkin"
+					Border="5"
+					TexX_All="137	142		160		165"
+					TexY_All="30	58"
+				/>
+			</primitive>
+			<!-- State: Locked -->
+			<primitive Name="Locked" Type="Texture_3">
+				<state Type="Partial" Positive="Locked" />
+				<texture
+					Image="BubbleSkin"
+					Border="5"
+					TexX_All="137	142		160		165"
+					TexY_All="60	88"
+				/>
+			</primitive>
+			<!-- Value -->
+			<primitive Name="Value" Type="Text" Margin="5 4 5 8">
+				<color AllCorners="90 55 55 255" />
+				<text Align="Left Center" />
+			</primitive>
+		</primitive>
+	</template>
+</AlbaLynx>

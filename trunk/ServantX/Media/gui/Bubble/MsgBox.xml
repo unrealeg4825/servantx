@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="ANSI"?>
+<AlbaLynx>
+	<!-- =========================================== -->
+	<!-- Default template of "Window" -->
+	<!-- Шаблон *по умолчанию* для элемента "Window" -->
+	<template Name="MsgBox">
+		<!-- Затемнение -->
+		<primitive Name="Background" Type="Rect" Margin="-500">
+			<color AllCorners="0 0 0 50"/>
+		</primitive>
+		<!-- Window color -->
+		<primitive Name="bg_color" Type="Texture_9">
+			<state Type="Partial" Negative="InFocus | InFocusC" />
+			<color TopLeft="220 230 240 255" TopRight="220 230 240 255" BottomLeft="168 178 188 255" BottomRight="168 178 188 255" />
+			<texture
+				Image="BubbleSkin"
+				Border="6"
+				TexX_All="0		6	8	14"
+				TexY_All="72	78	80	86"
+			/>
+		</primitive>
+		<!-- Window color in focus -->
+		<primitive Name="bg_color_focus" Type="Texture_9">
+			<state Type="PartialALO" Positive="InFocus | InFocusC" />
+			<color TopLeft="230 240 250 255" TopRight="230 240 250 255" BottomLeft="178 188 198 255" BottomRight="178 188 198 255" />
+			<texture
+				Image="BubbleSkin"
+				Border="6"
+				TexX_All="0		6	8	14"
+				TexY_All="72	78	80	86"
+			/>
+		</primitive>
+		<!-- The frame and the shadow -->
+		<primitive Name="BorderShadow" Type="Texture_9" Margin="-6 -10 -14">
+			<texture
+				Image="BubbleSkin"
+				Border="26 25 34"
+				ARGB_All="#FFFFFFFF"
+				TexX_All="0		25		45		70"
+				TexY_All="186	212		222		256"
+			/>
+		</primitive>
+		<!-- The title of the window -->
+		<primitive Name="Caption" Type="Text" Margin="-16 0 0 5">
+			<color AllCorners="245 250 255 255" />
+			<text Font="PT_Sans_Bold" />
+		</primitive>
+		<!-- The body of the window. Vertical collision with the title is enabled -->
+		<primitive Name="Body" Type="Dummy" Margin="2">
+			<primitive Name="Message" Type="Text" Margin="15" Height="-1" Collision="2">
+				<color AllCorners="55 60 65 255" />
+				<text WordWrap="True" />
+			</primitive>
+			<primitive Name="Buttons" Type="Dummy" Margin="5 10 15" Align="Top Center" Collision="2" />
+		</primitive>
+	</template>
+</AlbaLynx>

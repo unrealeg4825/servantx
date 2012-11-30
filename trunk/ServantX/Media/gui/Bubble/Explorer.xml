@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="ANSI"?>
+<AlbaLynx>
+	<!-- ============================================ -->
+	<!-- Default template for "Explorer" element -->
+	<!-- Шаблон *по умолчанию* для элемента "Explorer" -->
+	<template Name="Explorer">
+		<!-- The text of the button -->
+		<!-- Текст кнопки -->
+		<primitive Name="Caption" Type="Text" Margin="0 0 0 10" Collision="2" height="-1">
+			<color AllCorners="55 60 65 255" />
+			<text WordWrap="Yes" />
+		</primitive>
+		<!-- Body -->
+		<!-- Тело -->
+		<primitive Name="Tree" Type="Dummy" Collision="2">
+			<default Icons="cdrom=CDROM|fixed=HDD|removable=USB|folder=Folder|file=File" />
+		</primitive>
+	</template>
+</AlbaLynx>

@@ -1,0 +1,384 @@
+<?xml version="1.0" encoding="ANSI"?>
+<AlbaLynx>
+	<!-- ============================================================== -->
+	<!-- Default template for horizontal "ScrollBar" -->
+	<template Name="ScrollBarH">
+		<!-- Dscription -->
+		<primitive Name="Caption" Type="Text" Height="-1" Collision="2">
+			<color AllCorners="55 60 65 255" />
+			<text Align="Center Top"/>
+		</primitive>
+		<!-- The body of the scrollbar -->
+		<primitive Name="Body" Type="Dummy" Height="26" Collision="2">
+			<!-- Background -->
+			<primitive Name="Background" Type="Texture_3">
+				<texture
+					Image="BubbleSkin"
+					Border="6"
+					TexX_1="137 137 137 137"
+					TexX_2="163 163 163 163"
+					TexY_1="120 126 140 146"
+					TexY_2="120 126 140 146"
+				/>
+			</primitive>
+			<primitive Type="Dummy" Height="20" Margin="3 4">
+				<!-- Left button -->
+				<primitive Name="ButtonMin" Type="Dummy" Width="15">
+					<default ChildTemplate="ScrollButtonLeft" />
+				</primitive>
+				<!-- Right button -->
+				<primitive Name="ButtonMax" Type="Dummy" Width="15" Align="Right">
+					<default ChildTemplate="ScrollButtonRight" />
+				</primitive>
+				<!-- The track of the scrollbar -->
+				<primitive Name="Track" Type="Dummy" Margin="0 16" />
+			</primitive>
+		</primitive>
+	</template>
+
+	<!-- ============================================================== -->
+	<!-- Default template for vertical "ScrollBar" -->
+	<template Name="ScrollBarV">
+		<!-- Dscription -->
+		<primitive Name="Caption" Type="Text" Width="-1" Collision="1" Margin="0 3 0 0">
+			<color AllCorners="55 60 65 255" />
+			<text Angle="-90" Align="Left Center" />
+		</primitive>
+		<!-- The body of the scrollbar -->
+		<primitive Name="Body" Type="Dummy" Width="26" Collision="1">
+			<!-- Background -->
+			<primitive Name="Background" Type="Texture_3v">
+				<texture
+					Image="BubbleSkin"
+					Border="6"
+					TexX_All="137 163"
+					TexY_All="120 126 140 146"
+				/>
+			</primitive>
+			<primitive Type="Dummy" Width="20" Margin="4 3">
+				<!-- Top button -->
+				<primitive Name="ButtonMin" Type="Dummy" Height="15">
+					<default ChildTemplate="ScrollButtonUp" />
+				</primitive>
+				<!-- Bottom button -->
+				<primitive Name="ButtonMax" Type="Dummy" Height="15" Align="Bottom">
+					<default ChildTemplate="ScrollButtonDown" />
+				</primitive>
+				<!-- The track of the scrollbar -->
+				<primitive Name="Track" Type="Dummy" Margin="16 0">
+					<default ChildTemplate="SliderV" />
+				</primitive>
+			</primitive>
+		</primitive>
+	</template>
+	
+	<!-- ============================================================== -->
+	<!-- Template for embedded horizontal "ScrollBar" -->
+	<template Name="ScrollBarH_Embedded">
+		<!-- The body of the scrollbar -->
+		<primitive Name="Body" Type="Dummy" Height="26" Collision="2">
+			<!-- Background -->
+			<primitive Name="Background" Type="Texture_3">
+				<texture
+					Image="BubbleSkin"
+					Border="6"
+					TexX_1="137 137 137 137"
+					TexX_2="163 163 163 163"
+					TexY_1="148 154 168 174"
+					TexY_2="148 154 168 174"
+				/>
+			</primitive>
+			<primitive Type="Dummy" Height="20" Margin="3 4">
+				<!-- Left button -->
+				<primitive Name="ButtonMin" Type="Dummy" Width="15">
+					<default ChildTemplate="ScrollButtonLeft" />
+				</primitive>
+				<!-- Right button -->
+				<primitive Name="ButtonMax" Type="Dummy" Width="15" Align="Right">
+					<default ChildTemplate="ScrollButtonRight" />
+				</primitive>
+				<!-- The track of the scrollbar -->
+				<primitive Name="Track" Type="Dummy" Margin="0 16" />
+			</primitive>
+		</primitive>
+	</template>
+
+	<!-- ============================================================== -->
+	<!-- Template for embedded vertical "ScrollBar" -->
+	<template Name="ScrollBarV_Embedded">
+		<!-- The body of the scrollbar -->
+		<primitive Name="Body" Type="Dummy" Width="26" Collision="1">
+			<!-- Background -->
+			<primitive Name="Background" Type="Texture_3v">
+				<texture
+					Image="BubbleSkin"
+					Border="6"
+					TexX_All="137 163"
+					TexY_All="148 154 168 174"
+				/>
+			</primitive>
+			<primitive Type="Dummy" Width="20" Margin="4 3">
+				<!-- Top button -->
+				<primitive Name="ButtonMin" Type="Dummy" Height="15">
+					<default ChildTemplate="ScrollButtonUp" />
+				</primitive>
+				<!-- Bottom button -->
+				<primitive Name="ButtonMax" Type="Dummy" Height="15" Align="Bottom">
+					<default ChildTemplate="ScrollButtonDown" />
+				</primitive>
+				<!-- The track of the scrollbar -->
+				<primitive Name="Track" Type="Dummy" Margin="16 0">
+					<default ChildTemplate="SliderV" />
+				</primitive>
+			</primitive>
+		</primitive>
+	</template>
+	
+	<!-- ============================================================== -->
+	<!-- Template for embedded2 horizontal "ScrollBar" -->
+	<template Name="ScrollBarH_Embedded_2">
+		<!-- The body of the scrollbar -->
+		<primitive Name="Body" Type="Dummy" Height="26" Collision="2">
+			<!-- Background -->
+			<primitive Name="Background" Type="Texture_3">
+				<texture
+					Image="BubbleSkin"
+					Border="6"
+					TexX_1="137 137 137 137"
+					TexX_2="163 163 163 163"
+					TexY_1="176 182 196 202"
+					TexY_2="176 182 196 202"
+				/>
+			</primitive>
+			<primitive Type="Dummy" Height="20" Margin="3 4">
+				<!-- Left button -->
+				<primitive Name="ButtonMin" Type="Dummy" Width="15">
+					<default ChildTemplate="ScrollButtonLeft" />
+				</primitive>
+				<!-- Right button -->
+				<primitive Name="ButtonMax" Type="Dummy" Width="15" Align="Right">
+					<default ChildTemplate="ScrollButtonRight" />
+				</primitive>
+				<!-- The track of the scrollbar -->
+				<primitive Name="Track" Type="Dummy" Margin="0 16" />
+			</primitive>
+		</primitive>
+	</template>
+
+	<!-- ============================================================== -->
+	<!-- Template for embedded2 vertical "ScrollBar" -->
+	<template Name="ScrollBarV_Embedded_2">
+		<!-- The body of the scrollbar -->
+		<primitive Name="Body" Type="Dummy" Width="26" Collision="1">
+			<!-- Background -->
+			<primitive Name="Background" Type="Texture_3v">
+				<texture
+					Image="BubbleSkin"
+					Border="6"
+					TexX_All="137 163"
+					TexY_All="176 182 196 202"
+				/>
+			</primitive>
+			<primitive Type="Dummy" Width="20" Margin="4 3">
+				<!-- Top button -->
+				<primitive Name="ButtonMin" Type="Dummy" Height="15">
+					<default ChildTemplate="ScrollButtonUp" />
+				</primitive>
+				<!-- Bottom button -->
+				<primitive Name="ButtonMax" Type="Dummy" Height="15" Align="Bottom">
+					<default ChildTemplate="ScrollButtonDown" />
+				</primitive>
+				<!-- The track of the scrollbar -->
+				<primitive Name="Track" Type="Dummy" Margin="16 0">
+					<default ChildTemplate="SliderV" />
+				</primitive>
+			</primitive>
+		</primitive>
+	</template>
+
+	<!-- =========================================== -->
+	<!-- Template for 'down' button of scrollbar -->
+	<template Name="ScrollButtonDown">
+		<!-- State: Passive -->
+		<primitive Name="BodyPassive" Type="Texture" Width="14" Height="11" Align="Center">
+			<state Type="Partial" Positive="None" Negative="Locked | Active | Pressed" />
+			<texture Image="BubbleSkin" XYWH="44 72 14 11" />
+		</primitive>
+		<!-- State: Active -->
+		<primitive Name="BodyActive" Type="Texture" Width="14" Height="11" Align="Center">
+			<state Type="PartialALO" Positive="Active | Pressed" Negative="Locked" />
+			<texture Image="BubbleSkin" XYWH="44 85 14 11" />
+		</primitive>
+		<!-- State: Locked -->
+		<primitive Name="BodyLocked" Type="Texture" Width="14" Height="11" Align="Center">
+			<state Type="PartialALO" Positive="Locked" />
+			<texture Image="BubbleSkin" XYWH="44 98 14 11" />
+		</primitive>
+	</template>
+
+	<!-- =========================================== -->
+	<!-- Template for 'up' button of scrollbar -->
+	<template Name="ScrollButtonUp">
+		<!-- State: Passive -->
+		<primitive Name="BodyPassive" Type="Texture" Width="14" Height="11" Align="Center">
+			<state Type="Partial" Positive="None" Negative="Locked | Active | Pressed" />
+			<texture Image="BubbleSkin" XYWH="44 83 14 -11" />
+		</primitive>
+		<!-- State: Active -->
+		<primitive Name="BodyActive" Type="Texture" Width="14" Height="11" Align="Center">
+			<state Type="PartialALO" Positive="Active | Pressed" Negative="Locked" />
+			<texture Image="BubbleSkin" XYWH="44 96 14 -11" />
+		</primitive>
+		<!-- State: Locked -->
+		<primitive Name="BodyLocked" Type="Texture" Width="14" Height="11" Align="Center">
+			<state Type="PartialALO" Positive="Locked" />
+			<texture Image="BubbleSkin" XYWH="44 109 14 -11" />
+		</primitive>
+	</template>
+
+	<!-- =========================================== -->
+	<!-- Template for 'right' button of scrollbar -->
+	<template Name="ScrollButtonRight">
+		<!-- State: Passive -->
+		<primitive Name="BodyPassive" Type="Texture" Width="11" Height="14" Align="Center">
+			<state Type="Partial" Positive="None" Negative="Locked | Active | Pressed" />
+			<texture Image="BubbleSkin" XYWH="47 111 11 14" />
+		</primitive>
+		<!-- State: Active -->
+		<primitive Name="BodyActive" Type="Texture" Width="11" Height="14" Align="Center">
+			<state Type="PartialALO" Positive="Active | Pressed" Negative="Locked" />
+			<texture Image="BubbleSkin" XYWH="47 127 11 14" />
+		</primitive>
+		<!-- State: Locked -->
+		<primitive Name="BodyLocked" Type="Texture" Width="11" Height="14" Align="Center">
+			<state Type="PartialALO" Positive="Locked" />
+			<texture Image="BubbleSkin" XYWH="47 143 11 14" />
+		</primitive>
+	</template>
+
+	<!-- =========================================== -->
+	<!-- Template for 'left' button of scrollbar -->
+	<template Name="ScrollButtonLeft">
+		<!-- State: Passive -->
+		<primitive Name="BodyPassive" Type="Texture" Width="11" Height="14" Align="Center">
+			<state Type="Partial" Positive="None" Negative="Locked | Active | Pressed" />
+			<texture Image="BubbleSkin" XYWH="58 111 -11 14" />
+		</primitive>
+		<!-- State: Active -->
+		<primitive Name="BodyActive" Type="Texture" Width="11" Height="14" Align="Center">
+			<state Type="PartialALO" Positive="Active | Pressed" Negative="Locked" />
+			<texture Image="BubbleSkin" XYWH="58 127 -11 14" />
+		</primitive>
+		<!-- State: Locked -->
+		<primitive Name="BodyLocked" Type="Texture" Width="11" Height="14" Align="Center">
+			<state Type="PartialALO" Positive="Locked" />
+			<texture Image="BubbleSkin" XYWH="58 143 -11 14" />
+		</primitive>
+	</template>
+
+	<!-- ======================================== -->
+	<!-- Default template for the slider of "ScrollBar" -->
+	<template Name="Slider">
+		<!-- State: Passive -->
+		<primitive Name="BodyPassive" Type="Texture_3">
+			<state Type="Partial" Positive="None" Negative="Locked | Active | Pressed | Checked" />
+			<texture
+				Image="BubbleSkin"
+				Border="6"
+				TexX_1="59 59 59 59"
+				TexX_2="79 79 79 79"
+				TexY_1="72 78 90 96"
+				TexY_2="72 78 90 96"
+			/>
+		</primitive>
+		<!-- State: Active -->
+		<primitive Name="BodyActive" Type="Texture_3">
+			<state Type="Partial" Positive="Active" Negative="Locked | Pressed | Checked" />
+			<texture
+				Image="BubbleSkin"
+				Border="6"
+				TexX_1="59 59 59 59"
+				TexX_2="79 79 79 79"
+				TexY_1="97 103 115 121"
+				TexY_2="97 103 115 121"
+			/>
+		</primitive>
+		<!-- State: Pressed -->
+		<primitive Name="BodyPressed" Type="Texture_3">
+			<state Type="Partial" Positive="Pressed" Negative="Locked" />
+			<texture
+				Image="BubbleSkin"
+				Border="6"
+				TexX_1="59 59 59 59"
+				TexX_2="79 79 79 79"
+				TexY_1="122 128 140 146"
+				TexY_2="122 128 140 146"
+			/>
+		</primitive>
+		<!-- State: Lock -->
+		<primitive Name="BodyLock" Type="Texture_3">
+			<state Type="Partial" Positive="Locked" />
+			<texture
+				Image="BubbleSkin"
+				Border="6"
+				TexX_1="59 59 59 59"
+				TexX_2="79 79 79 79"
+				TexY_1="147 153 165 171"
+				TexY_2="147 153 165 171"
+			/>
+		</primitive>
+		<!-- Lines -->
+		<primitive Name="Lines" Type="Texture" Width="7" Height="10" Align="Center">
+			<texture Image="BubbleSkin" XYWH="17 109 7 10" />
+		</primitive>
+	</template>
+
+	<!-- ======================================== -->
+	<!-- Template for the vertical slider of "ScrollBar" -->
+	<template Name="SliderV">
+		<!-- State: Passive -->
+		<primitive Name="BodyPassive" Type="Texture_3v">
+			<state Type="Partial" Positive="None" Negative="Locked | Active | Pressed" />
+			<texture
+				Image="BubbleSkin"
+				Border="6"
+				TexX_All="59 79"
+				TexY_All="72 78 90 96"
+			/>
+		</primitive>
+		<!-- State: Active -->
+		<primitive Name="BodyActive" Type="Texture_3v">
+			<state Type="Partial" Positive="Active" Negative="Locked | Pressed" />
+			<texture
+				Image="BubbleSkin"
+				Border="6"
+				TexX_All="59 79"
+				TexY_All="97 103 115 121"
+			/>
+		</primitive>
+		<!-- State: Pressed -->
+		<primitive Name="BodyPressed" Type="Texture_3v">
+			<state Type="Partial" Positive="Pressed" Negative="Locked" />
+			<texture
+				Image="BubbleSkin"
+				Border="6"
+				TexX_All="59 79"
+				TexY_All="122 128 140 146"
+			/>
+		</primitive>
+		<!-- State: Lock -->
+		<primitive Name="BodyLock" Type="Texture_3v">
+			<state Type="Partial" Positive="Locked" />
+			<texture
+				Image="BubbleSkin"
+				Border="6"
+				TexX_All="59 79"
+				TexY_All="147 153 165 171"
+			/>
+		</primitive>
+		<!-- Lines -->
+		<primitive Name="Lines" Type="Texture" Width="10" Height="7" Align="Center">
+			<texture Image="BubbleSkin" XYWH="17 100 10 7" />
+		</primitive>
+	</template>
+</AlbaLynx>

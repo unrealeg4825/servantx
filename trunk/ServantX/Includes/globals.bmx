@@ -1,0 +1,547 @@
+'Current Screen resolution x And y size. 
+'Useful For relative/scalable positioning of 2d images, such as the in game menu images 
+Global xvalue:Int = (xGraphicsWidth()/2)
+Global yvalue:Int = (xGraphicsHeight()/2)
+
+
+Global gLastMessageID:Int
+Const maxcharlength:Int=51
+Const LOWESTMESSAGERENDER:Int=79
+Const EDITMODE:Byte=True
+
+
+Global ZoneName:String
+Global Terrain:Int
+Global tex2:Int
+Global grasst:Int
+Global ZoneID:Int
+Const  fpsupdate:Int = 1000 'cannot be less than 1000
+Global fpscount:Int
+Global fpslastupdated:Int
+Global fpslastcount:Float
+Global CP_X:Float
+Global CP_Y:Float
+Global WORLD:String
+Global SKYFORMAT:String
+Global CP_Z:Float
+Global showinv:Int
+Global Gravity:Float = 0.16								'Game gravity
+Global PlayerGravity:Float = -0.3
+Global autowalk:Int
+Global FlyMode:Int=0									'If 1 Then flymode is on
+Global WalkSpeed:Float=.4								'this handled the walking motion
+Global Jumped:Int=0										'Jump check
+Global grassMesh:Int
+Global grassTexture:Int
+Global grassSurface:Int
+Global grassRange:Float
+Global Spectre:Int
+Const Water_Col:Int = 7
+Const Wep_col:Int = 8
+Global entityf:Int
+
+Global LogDatas:TList = New TList
+
+
+Type LogData
+
+	Method New()
+	
+		ListAddLast(LogDatas,Self)
+	
+	End Method
+
+	Field Name:String			' Log NAME
+	Field Value:String        ' Log VALUE
+End Type
+
+Global Valuables:TList = New TList
+
+Type Valuable
+	
+	Method New()
+		ListAddLast(Valuables,Self)
+	End Method
+	
+	Field ID:String			' NUMBER OF VALUABLE
+	Field Value:String		' VALUE OF VALUABLE
+End Type
+
+
+
+Type Vertices
+	Field x:Float
+	Field y:Float
+	Field z:Float
+End Type
+
+Global TVertex:Vertices[VertexCount]
+
+Global Shops:TList = New TList
+
+Type Shop
+
+	Method New()
+	
+		ListAddLast(Shops,Self)
+	End Method
+
+	Field Items:String		' ITEMS IT HAS (LIKE NPCS)
+	Field GOL:Int			' HOW MANY GOLDS THE SHOP KEEPER HAS
+	Field POT:Int			' HOW MANY POTIONS
+	Field Weapons:String		' WEAPONS For SALE
+	Field Armors:String		' ARMORS For SALE
+End Type
+
+
+Global SlotName:String[10]
+
+puking:Byte = False
+WORLD:String = "lvl"
+' lets you use nice pngs Or bmps instead of jpgs.  affects skybox textures 
+' only, Not heightmaps Or terrain textures.
+SKYFORMAT:String = "bmp"
+
+Const Lightning_Count:Int=3
+Global flash:Int=0
+
+Global Lightnings:TList = New TList
+
+Type lightning
+
+	Method New()
+	
+		ListAddLast(Lightnings,Self)
+	
+	End Method
+
+	Field ent:Int
+	Field surf:Int
+	Field alpha:Float
+End Type
+
+Global lightningbolts:TList = New TList
+
+Type lightningbolt
+
+	Method New()
+	
+		ListAddLast(lightningbolts,Self)
+	
+	End Method
+
+	Field x:Float,y:Float,z:Float,start:Int,entity1:Int,entity2:Int,entity3:Int
+End Type
+
+Global myname:String
+Global maxarrows:Int = 50 ' Max. number of bullets active
+Global currbull:Int = 0
+Global Arrowspeed:Float = 1
+Global reload_after:Int = 50
+Global Arrowcount:Int = 50
+Global Arrowgravity:Float =-.6
+Global TValuables:String[500]
+
+Global sound:Int
+Global camera:Int
+Global raining:Int
+Global gservertime:Float				'servertime
+Global gdecmin:Float = 1.0/60.0		'1 server minute in MilliSecs
+Global wep_type:Int 
+Global wep_power:Int
+Global Drinkbeer:Int
+Global AlcoholTolerance:Int
+Global recharge:Int 
+Global sendcounter:Int 
+Global CX:Float,CY:Float,CZ:Float
+Global Health:Int
+Const TYPE_SHOOT:Int = 1
+Global chatstring:String
+Global chatenabled:Int
+Global grass1:Int
+Global grass2:Int
+Global night:Int
+Global gGameTime:String			
+Const tomb_col:Int = 6
+
+Global sounds:Int[99]
+
+Global objs:TList = New TList
+
+Type obj
+
+	Method New()
+	
+		ListAddLast(objs,Self)
+	
+	End Method
+
+
+	Field x:Float,y:Float,z:Float
+	Field entity:Int
+	Field FileName:String 
+	Field yaw:Int,pitch:Int,roll:Int
+	Field visible:Int
+	Field scalex:Float,scaley:Float,scalez:Float
+End Type
+
+
+Global Nodes:TList = New TList
+
+Type Node
+
+	Method New()
+	
+		ListAddLast(Nodes,Self)
+		
+	End Method
+	
+	Field x#,y#,z#
+	Field nodetype = 0
+	Field sprite
+	
+
+End Type
+
+Global rocksl:TList = New TList
+
+Type rocks
+
+	Method New()
+	
+		ListAddLast(rocksl,Self)
+	
+	End Method
+
+	Field x:Float,y:Float,z:Float
+	Field entity:Int
+	Field FileName:String
+End Type
+
+Global pdatas:TList = New TList
+
+'Create a player
+Type pdata
+
+	Method New()
+	
+		ListAddLast(pdatas,Self)
+	
+	End Method
+
+	Field X#,Y#,Z#,oldX#,OldY#,OldZ#,name$,net_id,entity,yaw#,packetyaw#,namesprite,model,sex
+	Field Experience,health,mana,strength,dexterity,Lvl,constitution,luck,charisma,Hitpoints,intelligence,hunger,Energy
+	Field dataused,anim,splineid,packettime,lasttime,initialized,nomovement,packetx#,packety#,packetz#,Zone
+	
+End Type
+
+Global grasss:TList = New TList
+
+Type grass
+
+	Method New()
+	
+		ListAddLast(grasss,Self)
+		
+	End Method
+	
+	Field x:Float,y:Float,z:Float
+	Field entity:Int
+	Field FileName:String
+End Type
+
+Global NPCSL:TList = New TList
+
+Type NPCS
+
+	Method New()
+	
+		ListAddLast(NPCSL,Self)
+		
+	End Method
+
+	Field X#,Y#,Z#,oldX#,OldY#,OldZ#,name$,net_id,entity,yaw#,packetyaw#,namesprite,model
+	Field Experience,health,mana,strength,dexterity,Lvl,constitution,luck,charisma,Hitpoints,intelligence,hunger,Energy
+	Field dataused,anim,splineid,packettime,lasttime,initialized,nomovement,packetx#,packety#,packetz#
+	Field SIDE,Speed
+	
+End Type
+
+Global WeaponsClass:Int
+Global WeaponName:String
+
+Global inventories:TList = New TList
+
+Type inventory
+
+	Method New()
+	
+		ListAddLast(inventories,Self)
+		
+	End Method
+
+    Field wielded:Weapons
+	Field amount
+	Field holding
+	Field Typeobj
+	Field name$
+	Field damage
+	Field magicid
+	Field bodyposition
+	Field active
+	Field container
+	Field wieght
+	Field size
+	Field holdingcontainerID
+	Field identifiedAsMagicItem 
+	Field QuestItem
+	Field spoils
+	Field Icon
+End Type
+
+Global weaponsl:TList = New TList
+
+Type Weapons
+
+	Method New()
+	
+		ListAddLast(weaponsl,Self)
+		
+	End Method
+
+	Field entity
+	Field x#,y#,z#
+	Field name:String
+	Field HP
+	Field weight
+	Field Strength
+	Field Parent
+	Field InventoryIcon
+	Field InvetorySlot
+	Field ID
+	Field file:String
+End Type
+
+Global Infos:TList = New TList
+
+Type Info
+
+	Method New()
+	
+		ListAddLast(Infos,Self)
+		
+	End Method
+
+	Field txt:String,set:Int
+End Type
+
+Global Users:TList = New TList
+
+Type User
+
+	Method New()
+	
+		ListAddLast(Users,Self)
+		
+	End Method
+
+	Field Nick:String
+End Type
+
+Global Messages:TList = New TList
+
+Type Message
+
+	Method New()
+	
+		ListAddLast(Messages,Self)
+		
+	End Method
+	
+	Field Action:Int
+	Field iText:String,iColor:Int
+	Field From:String,fColor:Int
+	Field id:Int
+End Type
+
+' Modify these If you like :)
+Const  WATER_GRID_SIZE:Int = 16
+Global WATER_HEIGHT:Float = 8.2
+
+' Setup the water grid value
+Global WaterY[WATER_GRID_SIZE+1,WATER_GRID_SIZE+1]
+For q = 0 To WATER_GRID_SIZE
+	For j = 0 To WATER_GRID_SIZE
+		WaterY[q,j] = Rnd(0,360)
+	Next 
+Next
+
+Global Splashtexs:TList = New TList
+
+Type Splashtex
+
+	Method New()
+	
+		ListAddLast(Splashtexs,Self)
+	
+	End Method
+
+	Field x#,y#
+	Field sx#,sy#
+	Field ox#,oy#
+	Field c#
+End Type
+
+Global Splash3Ds:TList = New TList
+
+Type Splash3D
+	Method New()
+	
+		ListAddLast(Splash3Ds,Self)
+	
+	End Method
+
+	Field sprite
+	Field x#,y#,z#
+	Field texture
+	Field frame#,frames
+	Field active
+End Type
+
+Global Rain3Ds:TList = New TList
+
+Type Rain3D
+	Method New()
+	
+		ListAddLast(Rain3Ds,Self)
+	
+	End Method
+
+	Field sprite
+	Field x#,y#,z#
+	Field sx#,sy#,sz#
+	Field active
+End Type
+
+Global Ring3Ds:TList = New TList
+
+Type Ring3D
+
+	Method New()
+	
+		ListAddLast(Ring3Ds,Self)
+	
+	End Method
+
+	Field sprite
+	Field x#,y#,z#
+	Field texture
+	Field frame#,frames
+	Field active
+End Type
+
+Global experiance =10
+Global energy = 54
+Global weight = 30
+Global Armor = 45
+Global Strength = 80
+Global Wisdom = 20
+Global Dexterity = 66
+Global Consitution = 73
+Global luck = 70
+Global hitpoints = 85
+Global intelligence = 38
+Global hunger = 10
+Global mana = 100
+Global level = 1
+
+Global animals:TList = New TList
+
+Type animal
+
+	Method New()
+	
+		ListAddLast(animals,Self)
+	
+	End Method
+
+	Field x#
+	Field z#
+	Field packetx#
+	Field packetz#
+	Field packety#
+	Field y#
+	Field yaw#
+	Field packetyaw#
+	Field entity
+	Field id
+	Field timestamp
+	Field lasttime#
+	Field splineid
+	Field distancetoplayer#
+	
+
+	
+End Type
+
+Global npccount = 20
+Global s:Splashtex
+Global s3d:Splash3D
+Global r3d:Rain3D
+Global t3d:Ring3D
+
+SeedRnd MilliSecs()
+
+' Colors
+Global envr = 76
+Global envg = 100
+Global envb = 110
+
+Global RainSpeed# = 2.0
+
+'animation variables
+
+Global initilizedplayerposition	'used To flag initial playerposition received
+Global temppivot
+Global dt
+Global INITZone
+Global helps 'help screen on/off toggle
+Global myzone
+Global oldmoved,moved 'playeranimation toggle
+
+Global gDate$
+
+
+
+Global FXCamera,CubeLightMapSize,CubeLightMapTexture,WaterMapSize,WaterMapTexture,waterdirection
+
+Global entities:TList = New TList
+
+Type entity
+
+	Method New()
+	
+		ListAddLast(entities,Self)
+	
+	End Method
+
+	Field ent
+End Type
+
+CubeLightMapSize = 256 ' the resolution of the dynamic lightmap *Not used in this demo*
+WaterMapSize = 256 ' the resolution of the water
+
+Global bumptextures:TList = New TList
+
+Type bumptexture
+
+	Method New()
+	
+		ListAddLast(bumptextures,Self)
+	
+	End Method
+
+	Field filename$
+End Type
+'~IDEal Editor Parameters:
+'~C#Blitz3D

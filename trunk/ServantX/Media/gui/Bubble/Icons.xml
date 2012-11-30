@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="ANSI"?>
+<AlbaLynx>
+	<!-- ====== -->
+	<!-- Icons -->
+
+	<icon Name="Folder">
+		<!-- Icon texture -->
+		<primitive Name="closed" Type="Texture">
+			<state Type="Partial" Positive="Minimized" />
+			<texture Image="BubbleSkin" XYWH="0 123 16 16" />
+		</primitive>
+		<primitive Name="opened" Type="Texture">
+			<state Type="Partial" Negative="Minimized" />
+			<texture Image="BubbleSkin" XYWH="0 141 16 16" />
+		</primitive>
+		<!-- For autosize -->
+		<primitive Name="Autosize" Type="Dummy" Width="16" Height="16" />
+	</icon>
+
+	<icon Name="File">
+		<!-- Icon texture -->
+		<primitive Name="File" Type="Texture">
+			<texture Image="BubbleSkin" XYWH="0 159 16 16" />
+		</primitive>
+		<!-- For autosize -->
+		<primitive Name="Autosize" Type="Dummy" Width="16" Height="16" />
+	</icon>
+
+	<icon Name="HDD">
+		<!-- Icon texture -->
+		<primitive Name="HDD" Type="Texture">
+			<texture Image="BubbleSkin" XYWH="18 123 16 16" />
+		</primitive>
+		<!-- For autosize -->
+		<primitive Name="Autosize" Type="Dummy" Width="16" Height="16" />
+	</icon>
+
+	<icon Name="USB">
+		<!-- Icon texture -->
+		<primitive Name="USB" Type="Texture">
+			<texture Image="BubbleSkin" XYWH="18 141 16 16" />
+		</primitive>
+		<!-- For autosize -->
+		<primitive Name="Autosize" Type="Dummy" Width="16" Height="16" />
+	</icon>
+
+	<icon Name="CDROM">
+		<!-- Icon texture -->
+		<primitive Name="CDROM" Type="Texture">
+			<texture Image="BubbleSkin" XYWH="18 159 16 16" />
+		</primitive>
+		<!-- For autosize -->
+		<primitive Name="Autosize" Type="Dummy" Width="16" Height="16" />
+	</icon>
+	
+	<icon Name="Up">
+		<!-- Arrow -->
+		<primitive Name="ArrowUp" Type="Texture" Width="15" Height="14">
+			<state Type="Partial" Negative="Locked" />
+			<texture Image="BubbleSkin" XYWH="0 109 15 -14" />
+		</primitive>
+		<primitive Name="ArrowUpLock" Type="Texture" Width="15" Height="14">
+			<state Type="Partial" Positive="Locked" />
+			<color AllCorners="#66FFFFFF" />
+			<texture Image="BubbleSkin" XYWH="0 109 15 -14" />
+		</primitive>
+	</icon>
+	
+	<icon Name="Down">
+		<!-- Arrow -->
+		<primitive Name="ArrowDown" Type="Texture" Width="15" Height="14">
+			<state Type="Partial" Negative="Locked" />
+			<texture Image="BubbleSkin" XYWH="0 95 15 14" />
+		</primitive>
+		<primitive Name="ArrowDownLock" Type="Texture" Width="15" Height="14">
+			<state Type="Partial" Positive="Locked" />
+			<color AllCorners="#66FFFFFF" />
+			<texture Image="BubbleSkin" XYWH="0 95 15 14" />
+		</primitive>
+	</icon>
+</AlbaLynx>

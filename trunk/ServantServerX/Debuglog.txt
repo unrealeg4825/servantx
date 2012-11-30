@@ -1,0 +1,32 @@
+DATE: 09 Dec 2009 : TIME: 16:04:12
+loading image
+PPIVOT
+Ambient sounds 1
+Ambient sounds 2
+Ambient sounds 3
+Signs
+Handle Textures
+Help
+Celtic Axe
+CSIMG
+CS1properties
+Tex1
+GUI part 1
+GUI part 2
+GUI part 3
+GUI part 4
+GUI part 5
+GUI part 6
+GUI part 7
+GUI part 8
+GUI part 9
+GUI part 10
+GUI part 11
+COMPASS MODEL MADE
+Thunder.wav
+Tomb1.b3d
+GUI part 12
+GUI part 13
+Rain.wav
+GUI part 14
+Graphics Engine Started ok! DATE: 09 Dec 2009 : TIME: 16:04:13
