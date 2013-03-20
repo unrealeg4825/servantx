@@ -1927,9 +1927,9 @@ _1634:
 	call	dword [_bbOnDebugEnterStm]
 	add	esp,4
 	push	0
-	push	1084227584
-	push	1084227584
-	push	1084227584
+	push	1065353216
+	push	1065353216
+	push	1065353216
 	push	dword [_bb_player]
 	call	_xorsteam_xors3d_xScaleEntity
 	add	esp,20
@@ -38005,7 +38005,7 @@ _bb_entityf:
 _2516:
 	db	"LogDatas",0
 _2517:
-	db	":TList",0
+	db	":brl.linkedlist.TList",0
 	align	4
 _bb_LogDatas:
 	dd	_bbNullObject
@@ -38627,7 +38627,7 @@ _2657:
 _2658:
 	db	"event",0
 _2659:
-	db	":sEvent",0
+	db	":albalynx.albalynx.sEvent",0
 _2660:
 	db	"mysex",0
 _2661:
@@ -38727,7 +38727,7 @@ _bb_BP_TimeoutPeriod:
 _2680:
 	db	"BP_Log",0
 _2681:
-	db	":TStream",0
+	db	":brl.stream.TStream",0
 	align	4
 _bb_BP_Log:
 	dd	_bbNullObject
@@ -38744,7 +38744,7 @@ _bb_BP_UDPdebug:
 _2684:
 	db	"BP_UDP_Stream",0
 _2685:
-	db	":TUDPStream",0
+	db	":vertex.bnetex.TUDPStream",0
 	align	4
 _bb_BP_UDP_Stream:
 	dd	_bbNullObject
@@ -43016,7 +43016,7 @@ _bb_rain_ripple:
 	dd	_bbObjectReserved
 	dd	_bbObjectReserved
 _1402:
-	db	"$BMXPATH/projects/TheServantModified/Engine/includes/prepare.bmx",0
+	db	"$BMXPATH/Projects/Servantx/ServantX/includes/prepare.bmx",0
 	align	4
 _1401:
 	dd	_1402
@@ -43087,7 +43087,7 @@ _29:
 	dw	77,101,100,105,97,47,103,117,105,47,98,117,98,98,108,101
 	dw	46,120,109,108
 _1416:
-	db	"$BMXPATH/projects/TheServantModified/Engine/includes/globals.bmx",0
+	db	"$BMXPATH/Projects/Servantx/ServantX/includes/globals.bmx",0
 	align	4
 _1415:
 	dd	_1416
@@ -43792,9 +43792,9 @@ _1633:
 _243:
 	dd	_bbStringClass
 	dd	2147483647
-	dd	30
+	dd	28
 	dw	109,101,100,105,97,47,109,111,100,101,108,115,47,112,108,97
-	dw	121,101,114,47,107,110,105,103,104,116,46,98,51,100
+	dw	121,101,114,47,116,101,109,112,46,102,98,120
 	align	4
 _1635:
 	dd	_1402
@@ -43860,7 +43860,7 @@ _244:
 	dd	12
 	dw	66,105,112,48,49,32,82,32,72,97,110,100
 _1657:
-	db	"$BMXPATH/projects/TheServantModified/Engine/includes/createchar.bmx",0
+	db	"$BMXPATH/Projects/Servantx/ServantX/includes/createchar.bmx",0
 	align	4
 _1656:
 	dd	_1657
@@ -44277,7 +44277,7 @@ _275:
 	dd	12
 	dw	76,111,97,100,105,110,103,32,71,97,109,101
 _1759:
-	db	"$BMXPATH/projects/TheServantModified/Engine/includes/BPproV1.0.bmx",0
+	db	"$BMXPATH/Projects/Servantx/ServantX/includes/BPproV1.0.bmx",0
 	align	4
 _1758:
 	dd	_1759
@@ -44430,7 +44430,7 @@ _1801:
 	dd	51
 	dd	1
 _1805:
-	db	"$BMXPATH/projects/TheServantModified/Engine/includes/net.bmx",0
+	db	"$BMXPATH/Projects/Servantx/ServantX/includes/net.bmx",0
 	align	4
 _1804:
 	dd	_1805
@@ -44623,7 +44623,7 @@ _1847:
 	dd	63
 	dd	24
 _1849:
-	db	"$BMXPATH/projects/TheServantModified/Engine/includes/load.bmx",0
+	db	"$BMXPATH/Projects/Servantx/ServantX/includes/load.bmx",0
 	align	4
 _1848:
 	dd	_1849
@@ -46522,7 +46522,7 @@ _2344:
 	dd	554
 	dd	2
 _2351:
-	db	"$BMXPATH/projects/TheServantModified/Engine/includes/warps.bmx",0
+	db	"$BMXPATH/Projects/Servantx/ServantX/includes/warps.bmx",0
 	align	4
 _2350:
 	dd	_2351
@@ -46629,7 +46629,7 @@ _2375:
 	dd	574
 	dd	1
 _2377:
-	db	"$BMXPATH/projects/TheServantModified/Engine/Servant.bmx",0
+	db	"$BMXPATH/Projects/Servantx/ServantX/Servant.bmx",0
 	align	4
 _2376:
 	dd	_2377
@@ -47305,7 +47305,7 @@ _3001:
 	dd	_3002
 	dd	0
 _2957:
-	db	"$BMXPATH/projects/TheServantModified/Engine/includes/functions.bmx",0
+	db	"$BMXPATH/Projects/Servantx/ServantX/includes/functions.bmx",0
 	align	4
 _2956:
 	dd	_2957
@@ -48352,11 +48352,11 @@ _3587:
 _3588:
 	db	"Doc",0
 _3589:
-	db	":xmlDocument",0
+	db	":pub.maxml.xmlDocument",0
 _3590:
 	db	"DocRoot",0
 _3591:
-	db	":xmlNode",0
+	db	":pub.maxml.xmlNode",0
 _3592:
 	db	"cnode",0
 _3593:
@@ -59182,13 +59182,13 @@ _8443:
 _8444:
 	db	"wwwsock",0
 _8445:
-	db	":TSocket",0
+	db	":brl.socket.TSocket",0
 _8446:
 	db	"connect",0
 _8447:
 	db	"www",0
 _8448:
-	db	":TSocketStream",0
+	db	":brl.socketstream.TSocketStream",0
 _8449:
 	db	"upstring",0
 _8450:

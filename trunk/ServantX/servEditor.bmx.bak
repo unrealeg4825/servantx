@@ -61,6 +61,13 @@ Global selectMask:Int    = 0
 Global controllPosX# = 0.0
 Global controllPosY# = 0.0
 Global controllPosZ# = 0.0
+Global scaleXInit# = 0.0
+Global scaleYInit# = 0.0
+Global scaleZInit# = 0.0
+Global deltaX#       = 1.0
+Global deltaY#       = 1.0
+Global deltaZ#       = 1.0
+
 Global mouseSpeedX   = 0
 Global mouseSpeedY   = 0
 Global Buildings:TList = New TList
@@ -472,9 +479,9 @@ Select event.type_
 			Case dropnode
 				n:node = New node
 				n.x# = xEntityx(camera)
-				n.y# = xEntityx(camera)
-				n.z# = xEntityx(camera)
-				n.sprite = xCreateSphere()
+				n.y# = xEntityy(camera)
+				n.z# = xEntityz(camera)
+				n.sprite = xCreateCube()
 				xPositionEntity n.sprite,n.x,n.y,n.z
 				xEntityPickMode n.sprite,2
 			Rem
@@ -590,7 +597,7 @@ Else
 	mys = mouseSpeedY	
 EndIf	
   control_object()
-
+	xText 10, 50, used_controller$
 xFlip
 Wend
 'Destroy()
@@ -637,15 +644,15 @@ Function control_object()
 					controllPosX = x
 					controllPosY = y
 					controllPosZ = z
-					deltaX       = 1.0
-					deltaY       = 1.0
-					deltaZ       = 1.0
+					deltaX#       = 1.0
+					deltaY#       = 1.0
+					deltaZ#       = 1.0
 					scaleXInit   = xEntityScaleX(pentity)
 					scaleYInit   = xEntityScaleY(pentity)
 					scaleZInit   = xEntityScaleZ(pentity)
 				EndIf
 				xDrawScaleGizmo(x#, y#, z#, selectMask, deltaX, deltaY, deltaZ)
-				'used_controller$ = "Used scale controler"
+				used_controller$ = "Scale: "+scaleXInit+" "+scaleYInit+" "+scaleZInit
 			Default
 				'used_controller$ = ""
 			End Select
@@ -655,8 +662,8 @@ Function control_object()
 				useY     = selectMask & 2
 				useZ     = selectMask & 4
 				useG     = selectMask & 8
-				factorX# = 0.7 / Float(xGraphicsWidth())
-				factorY# = 0.7 / Float(xGraphicsHeight())
+				factorX# = 0.1 / Float(xGraphicsWidth())
+				factorY# = 0.1 / Float(xGraphicsHeight())
 				Select controlType
 				' if movement gizmo is used
 				Case 0
@@ -689,25 +696,27 @@ Function control_object()
 					dist# = Sqr(dx * dx + dy * dy + dz * dz)
 					' x-axis
 					If useX
-						move#      = ComputeMove(camera, 10.0, 0.0, 0.0) * factorX * dist
+						move#      = ComputeMove(camera, 1.0, 0.0, 0.0) * factorX * dist
 						deltaX     = deltaX     + move
 						scaleXInit = scaleXInit + move
 						xScaleEntity pentity, scaleXInit, scaleYInit, scaleZInit
 					EndIf
 					' y-axis
 					If useY
-						move#      = ComputeMove(camera, 0.0, 10.0, 0.0) * factorY * dist
+						move#      = ComputeMove(camera, 0.0, 1.0, 0.0) * factorY * dist
 						deltaY     = deltaY     + move
 						scaleYInit = scaleYInit + move
 						xScaleEntity pentity, scaleXInit, scaleYInit, scaleZInit
 					EndIf
 					' z-axis
 					If useZ
-						move#      = ComputeMove(camera, 0.0, 0.0, 10.0) * factorX * dist
+						move#      = ComputeMove(camera, 0.0, 0.0, 1.0) * factorX * dist
 						deltaZ     = deltaZ     + move
 						scaleZInit = scaleZInit + move
 						xScaleEntity pentity, scaleXInit, scaleYInit, scaleZInit
 					EndIf
+					used_controller$ = "Scale: "+scaleXInit+" "+scaleYInit+" "+scaleZInit
+
 				' if rotation gizmo is used
 				Case 1
 					' rotate controlled entity

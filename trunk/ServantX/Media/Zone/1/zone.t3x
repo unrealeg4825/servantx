@@ -1,11 +1,9 @@
 <?xml version="1.0"?>
 <root>
   <BUILDING>
-    <BLD filename="Media\models\City\zonea.3DS" xloc="200.000000" yloc="80.0000000" zloc="100.000000" pitch="-0.000000000" yaw="-0.000000000" roll="0.000000000" xscale="0.300000012" yscale="0.300000012" zscale="0.300000012"/>
+    <BLD filename="Media\models\Mines\mines.b3d" xloc="13.0929422" yloc="-20.4512253" zloc="27.4917049" pitch="-0.000000000" yaw="-0.000000000" roll="0.000000000" xscale="0.978229344" yscale="0.978229344" zscale="0.978229344"/>
   </BUILDING>
   <GRASS/>
   <PARTICLES/>
-  <NODES>
-    <ND xloc="214.214645" yloc="73.6123734" zloc="127.014977"/>
-  </NODES>
+  <NODES/>
 </root>
