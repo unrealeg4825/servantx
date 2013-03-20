@@ -27,9 +27,9 @@ Include "functions.bmx"
 mainmenu()
 DebugLog("Starting Game")
 Global pointer = xLoadImage("misc/pointer.png")
-Global player = xLoadAnimMesh("media/models/player/knight.b3d")
+Global player = xLoadAnimMesh("media/models/player/temp.fbx")
 xRotateEntity player,0,-180,0
-xScaleEntity player,5,5,5
+xScaleEntity player,1,1,1
 'HideEntity player
 Global knight_A_Idle = xExtractAnimSeq(player,2,41) 	'Idle
 Global knight_A_walk = xExtractAnimSeq(player,42,82)'walk
